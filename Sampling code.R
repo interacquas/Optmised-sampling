@@ -10,6 +10,8 @@ library(spatstat)
 library(dplyr)
 library(tibble)
 library(tidyr)
+library(geosphere)
+library(Rfast)
 
 
 sampleboost <- function(x, ignorance, boundary, nplot, perm, quant, approach){
@@ -79,7 +81,7 @@ sampleboost <- function(x, ignorance, boundary, nplot, perm, quant, approach){
   
 }
 
-out1 <- sampleboost(x=ndvi_clip, ignorance = mfi2, nplot= 9, quant = 0.99, perm = 10^6, boundary=area_studio)
+out1 <- sampleboost(x=ndvi_clip, ignorance = ndvi_clip, nplot= 9, quant = 0.99, perm = 1000, boundary=area_studio)
 
 out1
 
