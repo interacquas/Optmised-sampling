@@ -22,7 +22,8 @@ ndvi_clip <- projectRaster(ndvi_clip, crs = sr)
 
 ##### FUNZIONE
 
-sampleboost <- function(x, ignorance, boundary, nplot, perm, quant, approach){
+sampleboost <- function(x, ignorance, boundary, nplot, perm, quant, approach)
+  {
   ndvi.vx <-velox(x)
   igno.vx <- velox(ignorance)
   result<-list()
@@ -46,5 +47,6 @@ sampleboost <- function(x, ignorance, boundary, nplot, perm, quant, approach){
     pairwise_distances <- distm(dataset_points[,1:2])
     distanze[[i]] <- total.dist(pairwise_distances, method = "euclidean", square = FALSE, p = 0)
     setTxtProgressBar(pb, i)
-    
-  }
+  }}
+
+
