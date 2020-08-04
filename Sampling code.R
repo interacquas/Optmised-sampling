@@ -1,3 +1,7 @@
+if(!require(gdalUtils)){install.packages("gdalUtils"); library(gdalUtils)} # sostituire
+
+
+
 library(rgdal)
 library(raster)
 library(rgeos)
@@ -14,7 +18,7 @@ library(geosphere)
 library(Rfast)
 
 
-sampleboost <- function(x, ignorance, boundary, nplot, perm, quant, approach){
+sampleboost <- function(x, ignorance, boundary, nplot, perm, quant){
   ndvi.vx <-velox(x)
   igno.vx <- velox(ignorance)
   result<-list()
@@ -81,7 +85,7 @@ sampleboost <- function(x, ignorance, boundary, nplot, perm, quant, approach){
   
 }
 
-out1 <- sampleboost(x=ndvi_clip, ignorance = ndvi_clip, nplot= 9, quant = 0.99, perm = 1000, boundary=area_studio)
+out1 <- sampleboost(x=ndvi_clip, ignorance = ndvi_clip, nplot= 9, quant = 0.99, perm = 10000, boundary=area_studio)
 
 out1
 
