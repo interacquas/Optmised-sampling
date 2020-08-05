@@ -18,24 +18,24 @@ library(geosphere)
 library(Rfast)
 
 
-sampleboost <- function(x, ignorance, boundary, samp_strategy, nplot, perm, quant){
+sampleboost <- function(x, ignorance, boundary, nplot, radius, perm, quant){
   ndvi.vx <-velox(x)
   igno.vx <- velox(ignorance)
   result<-list()
   distanze<-matrix(ncol=1, nrow = perm)
   pb <- txtProgressBar(min = 0, max = perm, style = 3)
   for (i in 1:perm){
-    punti_random <- spsample(boundary, n=nplot, type= samp_strategy)
+    punti_random <- spsample(boundary, n=nplot, type='random')
     sampling_points <- as(punti_random, "data.frame")
     xy <- sampling_points[,c(1,2)]
     
     spdf <- SpatialPointsDataFrame(coords = xy, data = sampling_points,
                                    proj4string = CRS("+proj=longlat +datum=WGS84 +no_defs +ellps=WGS84 +towgs84=0,0,0"))
     
-    
-    estratti <- data.frame(coordinates(spdf),ndvi.vx$extract_points(sp = spdf))
+    spols <- gBuffer(spgeom=spdf, width=radius, byid=TRUE)
+    estratti <- data.frame(coordinates(spdf), ndvi.vx$extract(sp=spols, fun=median))
     names(estratti) <- c("x", "y", "ndvi")
-    estratti$ignorance <- igno.vx$extract_points(sp = spdf)
+    estratti$ignorance <- igno.vx$extract(sp=spols, fun=median)
     result[[i]]<-data.frame(estratti)
     dataset_points <- cbind(xy, ID = 1:NROW(xy))
     
@@ -85,7 +85,7 @@ sampleboost <- function(x, ignorance, boundary, samp_strategy, nplot, perm, quan
   
 }
 
-out1 <- sampleboost(x = ndvi_clip, ignorance = ignorance_map, samp_strategy='random', nplot= 20, quant = 0.99, perm = 1000, boundary=area_studio)
+out1 <- sampleboost(x=ndvi_clip, ignorance = ignorance_map, nplot= 9, radius=0.2, quant = 0.99, perm = 1000, boundary=area_studio)
 
 out1
 
@@ -98,7 +98,7 @@ out1_points <- SpatialPointsDataFrame(coords = xy_out1, data = out1$Best,
 
 
 plot(ndvi_clip)
-plot(area_studio, add=TRUE)
+plot(site, add=TRUE)
 plot(out1_points, add=TRUE)
 
 sp::plot(site)

@@ -8,8 +8,8 @@ normalize <- function(x) {
 
 
 alfa <- 1
-beta <- 0.9
-gamma <- 0.7
+beta <- 0.4
+gamma <- 1
 
 
 
