@@ -1,21 +1,18 @@
-if(!require(gdalUtils)){install.packages("gdalUtils"); library(gdalUtils)} # sostituire
+if(!require(rgdal)){install.packages("rgdal"); library(rgdal)} 
+if(!require(raster)){install.packages("raster"); library(raster)} 
+if(!require(rgeos)){install.packages("rgeos"); library(rgeos)} 
+if(!require(spsann)){install.packages("spsann"); library(spsann)} 
+if(!require(sp)){install.packages("sp"); library(sp)} 
+if(!require(ICSNP)){install.packages("ICSNP"); library(ICSNP)} 
+if(!require(velox)){install.packages("velox"); library(velox)} 
+if(!require(spcosa)){install.packages("spcosa"); library(spcosa)} 
+if(!require(spatstat)){install.packages("spatstat"); library(spatstat)} 
+if(!require(dplyr)){install.packages("dplyr"); library(dplyr)} 
+if(!require(tibble)){install.packages("tibble"); library(tibble)} 
+if(!require(tidyr)){install.packages("tidyr"); library(tidyr)} 
+if(!require(geosphere)){install.packages("geosphere"); library(geosphere)} 
+if(!require(Rfast)){install.packages("Rfast"); library(Rfast)} 
 
-
-
-library(rgdal)
-library(raster)
-library(rgeos)
-library(spsann)
-library(sp)
-library(ICSNP)
-library(velox)
-library(spcosa)
-library(spatstat)
-library(dplyr)
-library(tibble)
-library(tidyr)
-library(geosphere)
-library(Rfast)
 
 
 sampleboost <- function(x, ignorance, boundary, samp_strategy, nplot, perm, quant){
