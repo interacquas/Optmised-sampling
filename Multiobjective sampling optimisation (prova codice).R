@@ -1,5 +1,5 @@
-out1$`Aggregated matrix`
-
+library("plot3D")
+library("scales")
 
 normalize <- function(x) {
   return ((x - min(x)) / (max(x) - min(x)))
@@ -7,24 +7,33 @@ normalize <- function(x) {
 
 
 
+alfa <- 1
+beta <- 0.9
+gamma <- 0.7
+
+
+
 ndvi <- normalize(out1$`Aggregated matrix`$Variance)
 ign <- normalize(out1$`Aggregated matrix`$`Mean Ignorance`)
 dist <- normalize(out1$`Aggregated matrix`$`Mean Dist`)
-final <- ndvi * ign * dist
+final <- (alfa * ndvi) + (beta * ign) + (gamma * dist)
 
-plot(out1$`Aggregated matrix`$Try, ndvi, type="o", col="blue", pch="o", lty=1, ylim=c(0,1) )
-lines(out1$`Aggregated matrix`$Try, ndvi, col="blue", pch="*")
-
-
-points(out1$`Aggregated matrix`$Try, ign, col="red", pch="*")
-lines(out1$`Aggregated matrix`$Try, ign, col="red", pch="*")
-
-points(out1$`Aggregated matrix`$Try, dist, col="green",pch="+")
-lines(out1$`Aggregated matrix`$Try, dist, col="green", lty=3)
+index <- match(max(final), final)
+index
 
 
-plot(out1$`Aggregated matrix`$Try, final, type="o", col="black", pch="o", lty=1, ylim=c(0,1) )
+scatter3D(alfa*ndvi, beta*ign, gamma*dist, bty = "b2", colvar=final, zlab = "Miles gallon" ,clab = c("Multiobjective", "Sampling Optimisation"))
+scatter3D(x = alfa*ndvi[index], y = beta*ign[index], z = gamma*dist[index], add = TRUE, colkey = FALSE, 
+          pch = 18, cex = 3, col = "black")
+
+
+
+plot(out1$`Aggregated matrix`$Try, final, type="o", col="black", pch="o", lty=1, ylim=c(0,3) )
 lines(out1$`Aggregated matrix`$Try, final, col="black", pch="*")
-abline(h = max(final), col="red", lwd=3, lty=2)
+#abline(h = max(final), col="red", lwd=3, lty=2)
+#abline(V = index, col="red", lwd=3, lty=2)
+points(index,max(final), col="red", cex=1)
+
+
 
 

@@ -85,7 +85,7 @@ sampleboost <- function(x, ignorance, boundary, nplot, perm, quant){
   
 }
 
-out1 <- sampleboost(x=ndvi_clip, ignorance = ndvi_clip, nplot= 9, quant = 0.99, perm = 10000, boundary=area_studio)
+out1 <- sampleboost(x=ndvi_clip, ignorance = ignorance_map, nplot= 9, quant = 0.99, perm = 1000, boundary=area_studio)
 
 out1
 
