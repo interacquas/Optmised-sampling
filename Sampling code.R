@@ -13,7 +13,7 @@ if(!require(tidyr)){install.packages("tidyr"); library(tidyr)}
 if(!require(geosphere)){install.packages("geosphere"); library(geosphere)} 
 if(!require(Rfast)){install.packages("Rfast"); library(Rfast)} 
 
-#ciao 
+#ciao 88888
 
 sampleboost <- function(x, ignorance, boundary, samp_strategy, nplot, perm, quant){
   ndvi.vx <-velox(x)
