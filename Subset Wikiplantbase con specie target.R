@@ -1,4 +1,4 @@
-# Carico manualmente il file 'di Wiki'Wiki_ago2020_ignorance.csv", e lo chiamo wiki
+# Carico manualmente il file 'di Wiki' Wiki_ago2020_ignorance.csv", e lo chiamo wiki
 
 # Carico manualmente il file "Target species.xlsx" e lo chiamo 'target'
 
@@ -10,7 +10,7 @@ is.vector(target)
 
 wiki_new <- wiki[wiki$Taxon %in% target, ] # faccio il subset
 
-wiki_list <- unique(wiki_new$Taxon) # creo la lista delle specie presenti nel datframe
+wiki_list <- unique(wiki_new$Taxon) # creo la lista delle specie presenti nel dataframe
 
 
 setdiff(wiki_list, target) # le specie che sono nel dataframe ma non nel vettore: ovviamente il risultato deve essere un insieme vuoto
