@@ -6,7 +6,7 @@ library(sp)
 library(ignobioR)
 
 italia <- raster::getData('GADM', country='ITA', level=2) # creo lo shapefile dell'Italia
-plot(italia)
+plot(italia) 
 
 toscana <- italia[italia$NAME_1 == "Toscana",] # subsetto la Toscana
 plot(toscana)
