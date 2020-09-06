@@ -11,8 +11,9 @@ plot(italia)
 toscana <- italia[italia$NAME_1 == "Toscana",] # subsetto la Toscana
 plot(toscana)
 
-pisalucca <- italia[italia$NAME_2 == "Pisa" | italia$NAME_2 == "Lucca",] # subsetto la Toscana
-plot(pisalucca)
+livorno <- italia[italia$NAME_2 == "Livorno",] # subsetto la Toscana
+plot(livorno)
 
-map <- ignorance_map(wiki_final[1:1000,], site=pisalucca, year_study=2020, excl_areas = NULL, CRS.new = 3035, tau =20, cellsize= 5000) 
+wiki_final <- wiki_final(-c(1))
+map <- ignorance_map(wiki_final, site=livorno, year_study=2020, excl_areas = NULL, CRS.new = 3035, tau =20, cellsize= 2000) 
 
