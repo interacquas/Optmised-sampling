@@ -9,6 +9,7 @@ data(unsuitablezone)  #layer mare
 
 wiki_final <- read_csv("wiki_final.csv")
 wiki_final <- wiki_final[-c(1)]
+is.data.frame(wiki_final)
 head(wiki_final)
 
 area_studio <- readOGR(dsn = 'CELLA TARGET (materiale extra)', layer = 'Cella per campionamento_WGS84')
