@@ -5,15 +5,16 @@ library(raster)
 library(sp)
 library(ignobioR)
 
-italia <- raster::getData('GADM', country='ITA', level=2) # creo lo shapefile dell'Italia
-plot(italia)
+italia_reg <- raster::getData('GADM', country='ITA', level=1) # creo lo shapefile dell'Italia
+italia_prov <- raster::getData('GADM', country='ITA', level=2)
+plot(italia_prov)
 
-toscana <- italia[italia$NAME_1 == "Toscana",] # subsetto la Toscana
+toscana <- italia_reg[italia_reg$NAME_1 == "Toscana",] # subsetto la Toscana
 plot(toscana)
 
-livorno <- italia[italia$NAME_2 == "Livorno",] # subsetto la Toscana
-plot(livorno)
+pisalucca<- italia_prov[italia_prov$NAME_2 == "Pisa" | italia_prov$NAME_2 == "Lucca",] # subsetto la provincia
+plot(pisalucca)
 
-wiki_final <- wiki_final(-c(1))
-map <- ignorance_map(wiki_final, site=livorno, year_study=2020, excl_areas = NULL, CRS.new = 3035, tau =20, cellsize= 2000) 
+wiki_final <- wiki_final[-c(1)] #tolgo la prima colonna a wiki_final
+map <- ignorance_map(wiki_final, site=toscana, year_study=2020, excl_areas = NULL, CRS.new = 3035, tau =20, cellsize= 1000) 
 
