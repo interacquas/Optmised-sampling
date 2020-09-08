@@ -2,6 +2,7 @@ library(raster)
 library(ignobioR)
 library(sp)
 library(readr)
+library(rgdal)
 
 data(floratus)
 data(unsuitablezone)  #layer mare
@@ -19,4 +20,5 @@ plot(italia_prov)
 livorno <- italia_prov[italia_prov$NAME_2 == 'Livorno',]
 plot(livorno)
 
-vfl <- virtual_list(data_flor=wiki_final, excl_areas = livorno, site=area_studio, tau=20)
+wiki_final <- as.data.frame(wiki_final)
+vfl <- virtual_list(data_flor=wiki_final,  site=livorno, excl_areas = unsuitablezone, tau=20)
