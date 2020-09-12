@@ -48,9 +48,7 @@ sampleboost <- function(ndvi, ignorance, boundary, samp_strategy, nplot, perm, n
                                    proj4string = CRS("+proj=longlat +datum=WGS84 +no_defs +ellps=WGS84 +towgs84=0,0,0"))
     
     spectral_values <- raster::extract(ndvi, spdf)
-    igno_values <- raster::extract(ignorance, spdf) # questa riga dà errore
-    
-    
+    igno_values <- raster::extract(ignorance, spdf) 
     
     
     dataset_points <- cbind(xy, ID = 1:NROW(xy))
@@ -92,8 +90,7 @@ sampleboost <- function(ndvi, ignorance, boundary, samp_strategy, nplot, perm, n
   #####ORA c'è da normalizzare!
   
   ordered_solutions <- agg2[order(agg2[,'FINAL_SCORE'], decreasing = TRUE),]
-  best <- ordered_solutions[order(ordered_solutions[,3], decreasing = TRUE),]
-  Index <- as.numeric(best[1,1])
+  Index <- as.numeric(ordered_solutions[1,1])
   sol <- subset(new_mat[new_mat$try %in% Index,])
   sol2 <- subset(agg2[agg2$Try %in% Index,])
   return(list("Full matrix"=new_mat, "Aggregated matrix"=agg2, "Best"= sol, "Variance of sampling points"=sol2[,'Variance'],
@@ -122,7 +119,7 @@ sampleboost <- function(ndvi, ignorance, boundary, samp_strategy, nplot, perm, n
   
 }
 
-out1 <- sampleboost(ndvi = ndvi_map, ignorance = igno_map, samp_strategy='random', nplot= 20,  perm = 10, boundary=site,
+out1 <- sampleboost(ndvi = ndvi_map, ignorance = igno_map, samp_strategy='random', nplot= 20,  perm = 5, boundary=site,
                     ndvi.weight = 1, igno.weight=1, dist.weight=1)
 
 out1
@@ -165,7 +162,7 @@ head(ordered_solutions_2, 10)
 
 ########################################################################
 ####### Plotto la soluzione scelta #####################################
-prova <- out1$`Full matrix`[is.element(out1$`Full matrix`$try,  3313),]
+prova <- out1$`Full matrix`[is.element(out1$`Full matrix`$try, 3313),]
 
 xy_prova <- prova[,c(1,2)]
 
