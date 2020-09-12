@@ -14,6 +14,18 @@ if(!require(geosphere)){install.packages("geosphere"); library(geosphere)}
 if(!require(Rfast)){install.packages("Rfast"); library(Rfast)} 
 
 
+### CARICO I RASTER
+
+#ndvi
+igno_map <- raster("gis zone campionamento/MAPignorance.tif")
+
+#ignoranza
+
+ndvi_map <- raster("gis zone campionamento/MAPPA NDVI_28m.tif")
+
+
+### DEFINISCO LA FUNZIONE
+
 sampleboost <- function(x, ignorance, boundary, samp_strategy, nplot, perm, quant){
   ndvi.vx <-velox(x)
   igno.vx <- velox(ignorance)
@@ -81,7 +93,7 @@ sampleboost <- function(x, ignorance, boundary, samp_strategy, nplot, perm, quan
   
 }
 
-out1 <- sampleboost(x = ndvi_clip, ignorance = ignorance_map, samp_strategy='random', nplot= 20, quant = 0.99, perm = 1000, boundary=area_studio)
+out1 <- sampleboost(x = ndvi_map, ignorance = igno_map, samp_strategy='random', nplot= 20, quant = 0.99, perm = 1000, boundary=area_studio)
 
 out1
 
