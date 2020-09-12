@@ -30,7 +30,7 @@ ndvi_map <- raster("MATERIALE PER LA FUNZIONE//MAPPA NDVI area studio_28m.tif")
 
 ### DEFINISCO LA FUNZIONE
 
-sampleboost <- function(ndvi, ignorance, boundary, samp_strategy, nplot, perm, ndvi.weight, igno.weight, dist.weight){
+sampleboost <- function(ndvi, ignorance, boundary, samp_strategy, nplot, areaplot, perm, ndvi.weight, igno.weight, dist.weight){
   normalize <- function(x) {
     return ((x - min(x)) / (max(x) - min(x)))
   } # funzione per normalizzare
@@ -46,6 +46,19 @@ sampleboost <- function(ndvi, ignorance, boundary, samp_strategy, nplot, perm, n
     
     spdf <- SpatialPointsDataFrame(coords = xy, data = sampling_points,
                                    proj4string = CRS("+proj=longlat +datum=WGS84 +no_defs +ellps=WGS84 +towgs84=0,0,0"))
+    
+    
+    spdf_buffer <- gBuffer(spdf, width=sqrt(areaplot/pi), byid=TRUE ) #### CONTINUARE QUESTA RIGA
+    raster::intersect(spdf_buffer, spdf_buffer)
+    
+    # test self intersection
+    
+    #https://gis.stackexchange.com/questions/156660/loop-to-check-multiple-polygons-overlap-in-r
+    
+    
+    
+    
+    
     
     spectral_values <- raster::extract(ndvi, spdf)
     igno_values <- raster::extract(ignorance, spdf) 
@@ -66,7 +79,7 @@ sampleboost <- function(ndvi, ignorance, boundary, samp_strategy, nplot, perm, n
     setTxtProgressBar(pb, i)
     
   }
-  # questa parte va rivista
+  
   new_mat<-plyr::ldply(result, data.frame)
   new_mat$try<-as.factor(rep(1:perm, each= nplot))
   
@@ -94,7 +107,8 @@ sampleboost <- function(ndvi, ignorance, boundary, samp_strategy, nplot, perm, n
   sol <- subset(new_mat[new_mat$try %in% Index,])
   sol2 <- subset(agg2[agg2$Try %in% Index,])
   return(list("Full matrix"=new_mat, "Aggregated matrix"=agg2, "Best"= sol, "Variance of sampling points"=sol2[,'Variance'],
-              "Spatial Median of Distance"= sol2[,'Mean Dist']))
+              "Mean Ignorance" = sol2[,'igno_score'],
+              "Spatial Median of Distance"= sol2[,'Mean Dist'], "Final score"= sol2[,'FINAL_SCORE']))
   
   ## Plot best solution
   
@@ -119,7 +133,7 @@ sampleboost <- function(ndvi, ignorance, boundary, samp_strategy, nplot, perm, n
   
 }
 
-out1 <- sampleboost(ndvi = ndvi_map, ignorance = igno_map, samp_strategy='random', nplot= 20,  perm = 5, boundary=site,
+out1 <- sampleboost(ndvi = ndvi_map, ignorance = igno_map, samp_strategy='random', nplot= 20,  perm = 1000, boundary=site,
                     ndvi.weight = 1, igno.weight=1, dist.weight=1)
 
 out1
@@ -132,8 +146,8 @@ out1_points <- SpatialPointsDataFrame(coords = xy_out1, data = out1$Best,
                                       proj4string = CRS("+proj=utm +zone=32 +datum=WGS84 +units=m +no_defs +ellps=WGS84 +towgs84=0,0,0"))
 
 
-plot(ndvi_clip)
-plot(area_studio, add=TRUE)
+
+plot(site)
 plot(out1_points, add=TRUE)
 
 sp::plot(site)
