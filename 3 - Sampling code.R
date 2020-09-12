@@ -26,9 +26,12 @@ ndvi_map <- raster("gis zone campionamento/MAPPA NDVI_28m.tif")
 
 ### DEFINISCO LA FUNZIONE
 
-sampleboost <- function(x, ignorance, boundary, samp_strategy, nplot, perm, quant){
-  ndvi.vx <-velox(x)
-  igno.vx <- velox(ignorance)
+sampleboost <- function(ndvi, ignorance, boundary, samp_strategy, nplot, perm, ndvi.weight, igno.weight, dist.weight){
+  normalize <- function(x) {
+    return ((x - min(x)) / (max(x) - min(x)))
+  } # funzione per normalizzare
+  
+  
   result<-list()
   distanze<-matrix(ncol=1, nrow = perm)
   pb <- txtProgressBar(min = 0, max = perm, style = 3)
@@ -40,10 +43,10 @@ sampleboost <- function(x, ignorance, boundary, samp_strategy, nplot, perm, quan
     spdf <- SpatialPointsDataFrame(coords = xy, data = sampling_points,
                                    proj4string = CRS("+proj=longlat +datum=WGS84 +no_defs +ellps=WGS84 +towgs84=0,0,0"))
     
-    
-    estratti <- data.frame(coordinates(spdf),ndvi.vx$extract_points(sp = spdf))
+    spectral_values <- raster::extract(ndvi, spdf)
+    estratti <- data.frame(coordinates(spdf),spectral_values)
     names(estratti) <- c("x", "y", "ndvi")
-    estratti$ignorance <- igno.vx$extract_points(sp = spdf)
+    igno_values <- raster::extract(ignorance, spdf) # questa riga dà errore
     result[[i]]<-data.frame(estratti)
     dataset_points <- cbind(xy, ID = 1:NROW(xy))
     
@@ -52,7 +55,7 @@ sampleboost <- function(x, ignorance, boundary, samp_strategy, nplot, perm, quan
     setTxtProgressBar(pb, i)
     
   }
-  
+  # questa parte va rivista
   new_mat<-plyr::ldply(result, data.frame)
   new_mat$try<-as.factor(rep(1:perm, each= nplot))
   
@@ -93,7 +96,7 @@ sampleboost <- function(x, ignorance, boundary, samp_strategy, nplot, perm, quan
   
 }
 
-out1 <- sampleboost(x = ndvi_map, ignorance = igno_map, samp_strategy='random', nplot= 20, quant = 0.99, perm = 1000, boundary=area_studio)
+out1 <- sampleboost(ndvi = ndvi_map, ignorance = igno_map, samp_strategy='random', nplot= 20,  perm = 1000, boundary=area_studio)
 
 out1
 
