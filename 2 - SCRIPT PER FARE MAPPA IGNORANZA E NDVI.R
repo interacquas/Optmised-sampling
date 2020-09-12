@@ -14,6 +14,7 @@ site <- readOGR(dsn = 'gis zone campionamento', layer = 'campionamento meno escl
 ################### CREO LA MAPPA DI IGNORANZA ############################
 
 wiki_final <- read.csv("Wikiplantbase/wiki_final.csv")
+wiki_final <- wiki_new[, 2:ncol(wiki_new)]
 
 igno_map <- ignorance_map(wiki_final, site= site, year_study=2020, excl_areas = unsuitablezone, CRS.new = 3035, tau =20, cellsize= 5000) 
 
@@ -48,7 +49,7 @@ plot(site_repr, border="red", lines =3, add=TRUE)
 
 ##### ESPORTA FILE RASTER ######
 
-writeRaster(ndvi_crop2, "MAPPA NDVI_28m", format = "GTiff")
+#writeRaster(ndvi_crop2, "MAPPA NDVI_28m", format = "GTiff")
 
 
 

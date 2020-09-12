@@ -15,7 +15,7 @@ is.vector(target)
 
 wiki_new <- wiki[wiki$Taxon %in% target, ] # faccio il subset
 wiki_final <- wiki_new[, 2:ncol(wiki_new)]
-write.csv(wiki_final, "wiki_final.csv") # salvo il file wiki_final, cioè il dataframe da dare in pasto alla funzione di ignoranza 
+write.csv(wiki_final, "wiki_final.csv", row.names = FALSE) # salvo il file wiki_final, cioè il dataframe da dare in pasto alla funzione di ignoranza 
 
 wiki_list <- unique(wiki_final$Taxon) # creo la lista delle specie presenti nel dataframe
 
