@@ -14,14 +14,18 @@ if(!require(geosphere)){install.packages("geosphere"); library(geosphere)}
 if(!require(Rfast)){install.packages("Rfast"); library(Rfast)} 
 
 
-### CARICO I RASTER
+### CARICO I LAYER
 
-#ndvi
-igno_map <- raster("gis zone campionamento/MAPignorance.tif")
+# area studio
+site <- readOGR(dsn = 'gis zone campionamento', layer = 'campionamento meno esclusione')
 
-#ignoranza
 
-ndvi_map <- raster("gis zone campionamento/MAPPA NDVI_28m.tif")
+# ndvi
+igno_map <- raster("MATERIALE PER LA FUNZIONE/Mappa Ignoranza 5 Km.tif")
+
+# ignoranza
+
+ndvi_map <- raster("MATERIALE PER LA FUNZIONE//MAPPA NDVI area studio_28m.tif")
 
 
 ### DEFINISCO LA FUNZIONE
@@ -44,14 +48,23 @@ sampleboost <- function(ndvi, ignorance, boundary, samp_strategy, nplot, perm, n
                                    proj4string = CRS("+proj=longlat +datum=WGS84 +no_defs +ellps=WGS84 +towgs84=0,0,0"))
     
     spectral_values <- raster::extract(ndvi, spdf)
-    estratti <- data.frame(coordinates(spdf),spectral_values)
-    names(estratti) <- c("x", "y", "ndvi")
     igno_values <- raster::extract(ignorance, spdf) # questa riga dà errore
-    result[[i]]<-data.frame(estratti)
-    dataset_points <- cbind(xy, ID = 1:NROW(xy))
     
+    
+    
+    
+    dataset_points <- cbind(xy, ID = 1:NROW(xy))
     pairwise_distances <- distm(dataset_points[,1:2])
     distanze[[i]] <- total.dist(pairwise_distances, method = "euclidean", square = FALSE, p = 0)
+    
+    
+   
+    
+    estratti <- data.frame(coordinates(spdf),spectral_values, igno_values,  distanze[[i]])
+    names(estratti) <- c("x", "y", "ndvi", "ignorance", "ddistances")
+    
+    result[[i]]<-data.frame(estratti)
+    
     setTxtProgressBar(pb, i)
     
   }
@@ -61,11 +74,24 @@ sampleboost <- function(ndvi, ignorance, boundary, samp_strategy, nplot, perm, n
   
   agg1<-aggregate(new_mat$ndvi,by=list(new_mat$try),FUN=var)
   agg_igno<-aggregate(new_mat$ignorance,by=list(new_mat$try),FUN=mean)
-  agg2<-data.frame(agg1,distanze,agg_igno[[2]])
+  agg2<-data.frame(agg1, distanze, agg_igno[[2]])
   colnames(agg2)<-c('Try','Variance','Mean Dist', 'Mean Ignorance')
   agg2 <- na.omit(agg2)
-  agg3 <- agg2[agg2$Variance > quantile(agg2$Variance, quant),]
-  ordered_solutions <- agg3[order(agg3[,'Mean Dist'], decreasing = TRUE),]
+  
+  agg2$ndvi_score <- agg2$Variance * ndvi.weight
+  agg2$igno_score <- agg2$`Mean Ignorance` * igno.weight
+  agg2$spatial_score <- agg2$`Mean Dist` * dist.weight
+  
+  agg2$ndvi_norm <- normalize(agg2$ndvi_score)
+  agg2$igno_norm <- normalize(agg2$igno_score)
+  agg2$spatial_norm <- normalize(agg2$spatial_score)
+
+  agg2$FINAL_SCORE <- agg2$ndvi_norm * agg2$igno_norm * agg2$spatial_norm
+  
+  
+  #####ORA c'è da normalizzare!
+  
+  ordered_solutions <- agg2[order(agg2[,'FINAL_SCORE'], decreasing = TRUE),]
   best <- ordered_solutions[order(ordered_solutions[,3], decreasing = TRUE),]
   Index <- as.numeric(best[1,1])
   sol <- subset(new_mat[new_mat$try %in% Index,])
@@ -96,7 +122,8 @@ sampleboost <- function(ndvi, ignorance, boundary, samp_strategy, nplot, perm, n
   
 }
 
-out1 <- sampleboost(ndvi = ndvi_map, ignorance = igno_map, samp_strategy='random', nplot= 20,  perm = 1000, boundary=area_studio)
+out1 <- sampleboost(ndvi = ndvi_map, ignorance = igno_map, samp_strategy='random', nplot= 20,  perm = 10, boundary=site,
+                    ndvi.weight = 1, igno.weight=1, dist.weight=1)
 
 out1
 
