@@ -18,6 +18,8 @@ wiki_final <- wiki_new[, 2:ncol(wiki_new)]
 
 igno_map <- ignorance_map(wiki_final, site= site, year_study=2020, excl_areas = unsuitablezone, CRS.new = 3035, tau =20, cellsize= 5000) 
 
+#writeRaster(igno_map$MAPignorance, "Mappa Ignoranza 5 Km", format = "GTiff")
+
 
 ##########################################################################
 ################## CREO LA MAPPA SPETTRALE ###############################
@@ -49,7 +51,7 @@ plot(site_repr, border="red", lines =3, add=TRUE)
 
 ##### ESPORTA FILE RASTER ######
 
-#writeRaster(ndvi_crop2, "MAPPA NDVI_28m", format = "GTiff")
+#writeRaster(ndvi_crop2, "MAPPA NDVI area studio_28m", format = "GTiff")
 
 
 
