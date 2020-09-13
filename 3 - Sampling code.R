@@ -42,6 +42,8 @@ sampleboost <- function(ndvi, ignorance, boundary, samp_strategy, nplot, areaplo
   result<-list()
   distanze<-matrix(ncol=1, nrow = perm)
   check <- c()
+  
+  
   pb <- txtProgressBar(min = 0, max = perm, style = 3)
   
   
@@ -59,18 +61,22 @@ sampleboost <- function(ndvi, ignorance, boundary, samp_strategy, nplot, areaplo
     
     spdf_buffer <- gBuffer(spdf, width=sqrt(areaplot/pi), byid=TRUE )
 
-    # test self intersection
+    # Test self intersection
     combos <- combn(nrow(spdf_buffer@data),2)
-    check <- c()
     int <- c()
+    
     for(k in 1:ncol(combos)){
       ii <- combos[1,k]
       j <- combos[2,k]
       
-      int[[k]] <- as.vector(is.null(raster::intersect(spdf_buffer[ii, ], spdf_buffer[j,])))
-      int <- unlist(int, use.names=FALSE)
-      check[[i]] <- isFALSE(int)
+      int[k] <- gArea(raster::intersect(spdf_buffer[ii, ], spdf_buffer[j,]))
+      
+      area_sum <- sum(int)
       }
+      
+      if (area_sum > 0) {check[[i]] <- TRUE} else {check[[i]] <- FALSE}
+      
+      
 
     
     spectral_values <- raster::extract(ndvi, spdf) # campiono i valori del raster di NDVI
@@ -101,9 +107,9 @@ sampleboost <- function(ndvi, ignorance, boundary, samp_strategy, nplot, areaplo
   
   agg1<-aggregate(new_mat$ndvi,by=list(new_mat$try),FUN=var)
   agg_igno<-aggregate(new_mat$ignorance,by=list(new_mat$try),FUN=mean)
-  check_igno <- check
   
-  agg2<-data.frame(agg1, distanze, agg_igno[[2]], check_igno)
+  
+  agg2<-data.frame(agg1, distanze, agg_igno[[2]], unlist(check))
   colnames(agg2)<-c('Try','Variance','Mean Dist', 'Mean Ignorance', "INTERSECTION")
   agg2 <- na.omit(agg2)
   
@@ -149,7 +155,7 @@ sampleboost <- function(ndvi, ignorance, boundary, samp_strategy, nplot, areaplo
   
 }
 
-out1 <- sampleboost(ndvi = ndvi_map, ignorance = igno_map, samp_strategy='random', nplot= 20,  areaplot = 1000, perm = 5, boundary=site,
+out1 <- sampleboost(ndvi = ndvi_map, ignorance = igno_map, samp_strategy='random', nplot= 20,  areaplot = 10000000, perm = 5, boundary=site,
                     ndvi.weight = 1, igno.weight=1, dist.weight=1)
 
 out1
