@@ -41,6 +41,7 @@ sampleboost <- function(ndvi, ignorance, boundary, samp_strategy, nplot, areaplo
   
   result<-list()
   distanze<-matrix(ncol=1, nrow = perm)
+  check <- c()
   pb <- txtProgressBar(min = 0, max = perm, style = 3)
   
   
@@ -68,7 +69,7 @@ sampleboost <- function(ndvi, ignorance, boundary, samp_strategy, nplot, areaplo
       
       int[[k]] <- as.vector(is.null(raster::intersect(spdf_buffer[ii, ], spdf_buffer[j,])))
       int <- unlist(int, use.names=FALSE)
-      check <- isFALSE(int)
+      check[[i]] <- isFALSE(int)
       }
 
     
@@ -77,16 +78,17 @@ sampleboost <- function(ndvi, ignorance, boundary, samp_strategy, nplot, areaplo
     
     ## Calcolare distanze con CRS metrico
     # 1. obtain a ppp object from imported data
-    m <- ppp(dataset_points$x, dataset_points$y, range(dataset_points$x), range(dataset_points$y))
+    m <- ppp(xy$x, xy$y, range(xy$x), range(xy$y))
     # 2. calculate Euclidean distance matrix
     pairwise_distances <- pairdist.ppp(m)
-    distanze <- sum(pairwise_distances)
+    distanze[[i]] <- sum(pairwise_distances)
+    distance_values <- rep(distanze[[i]], nplot)
     
     
-    estratti <- data.frame(coordinates(spdf),spectral_values, igno_values,  distanze)
+    estratti <- data.frame(coordinates(spdf),spectral_values, igno_values,  distance_values)
     names(estratti) <- c("x", "y", "ndvi", "ignorance", "distances")
     
-    estratti$INTERSECTION <- check
+    estratti$INTERSECTION <- check[[i]]
     
     result[[i]]<-data.frame(estratti)
     
@@ -99,7 +101,7 @@ sampleboost <- function(ndvi, ignorance, boundary, samp_strategy, nplot, areaplo
   
   agg1<-aggregate(new_mat$ndvi,by=list(new_mat$try),FUN=var)
   agg_igno<-aggregate(new_mat$ignorance,by=list(new_mat$try),FUN=mean)
-  check_igno <- "BOH"
+  check_igno <- check
   
   agg2<-data.frame(agg1, distanze, agg_igno[[2]], check_igno)
   colnames(agg2)<-c('Try','Variance','Mean Dist', 'Mean Ignorance', "INTERSECTION")
@@ -151,6 +153,10 @@ out1 <- sampleboost(ndvi = ndvi_map, ignorance = igno_map, samp_strategy='random
                     ndvi.weight = 1, igno.weight=1, dist.weight=1)
 
 out1
+
+
+
+
 
 
 ##### PLOTTO LA SOLUZIONE OUT1, BEST SOLUTION
