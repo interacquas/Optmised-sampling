@@ -30,7 +30,7 @@ ndvi_map <- projectRaster(ndvi_map, crs=newproj)
 plot(ndvi_map)
 
 
-#################################
+#####################################
 ### DEFINISCO LA FUNZIONE ###########
 
 sampleboost <- function(ndvi, ignorance, boundary, samp_strategy, nplot, areaplot, perm, ndvi.weight, igno.weight, dist.weight){
@@ -51,7 +51,7 @@ sampleboost <- function(ndvi, ignorance, boundary, samp_strategy, nplot, areaplo
   
   
   for (i in 1:perm){
-    punti_random <- spsample(boundary, n=nplot, type= samp_strategy)
+    punti_random <- spsample(boundary, n=nplot, type= samp_strategy, iter = 10)
     sampling_points <- as(punti_random, "data.frame")
     xy <- sampling_points[,c(1,2)]
     
@@ -119,6 +119,8 @@ sampleboost <- function(ndvi, ignorance, boundary, samp_strategy, nplot, areaplo
 
   agg2$FINAL_SCORE <- agg2$ndvi_norm * agg2$igno_norm * agg2$spatial_norm
   
+  agg2 <- agg2[agg2$INTERSECTION=="FALSE",] ## elimino le configurazioni dove c'è intersezione
+  
   
   ordered_solutions <- agg2[order(agg2[,'FINAL_SCORE'], decreasing = TRUE),]
   Index <- as.numeric(ordered_solutions[1,1])
@@ -145,13 +147,13 @@ sampleboost <- function(ndvi, ignorance, boundary, samp_strategy, nplot, areaplo
     theme(legend.position = "none")+
     geom_density(data = out1$Best, aes(x = ndvi, colour = "red"))
   
-  print(p)
-  print(p2)
-  print(p3)
+  p
+  p2
+  p3
   
 }
 
-out1 <- sampleboost(ndvi = ndvi_map, ignorance = igno_map, samp_strategy='random', nplot= 20,  areaplot = 10^6, perm = 30, boundary=site,
+out1 <- sampleboost(ndvi = ndvi_map, ignorance = igno_map, samp_strategy='random', nplot= 10,  areaplot = 10^6, perm = 1000, boundary=site,
                     ndvi.weight = 1, igno.weight=1, dist.weight=1)
 
 out1
