@@ -4,15 +4,13 @@ if(!require(rgeos)){install.packages("rgeos"); library(rgeos)}
 if(!require(spsann)){install.packages("spsann"); library(spsann)} 
 if(!require(sp)){install.packages("sp"); library(sp)} 
 if(!require(ICSNP)){install.packages("ICSNP"); library(ICSNP)} 
-if(!require(velox)){install.packages("velox"); library(velox)} 
-if(!require(spcosa)){install.packages("spcosa"); library(spcosa)} 
 if(!require(spatstat)){install.packages("spatstat"); library(spatstat)} 
 if(!require(dplyr)){install.packages("dplyr"); library(dplyr)} 
 if(!require(tibble)){install.packages("tibble"); library(tibble)} 
 if(!require(tidyr)){install.packages("tidyr"); library(tidyr)} 
 if(!require(geosphere)){install.packages("geosphere"); library(geosphere)} 
 if(!require(Rfast)){install.packages("Rfast"); library(Rfast)} 
-
+library(sf)
 
 ### CARICO I LAYER
 
@@ -27,8 +25,13 @@ igno_map <- raster("MATERIALE PER LA FUNZIONE/Mappa Ignoranza 5 Km.tif")
 
 ndvi_map <- raster("MATERIALE PER LA FUNZIONE//MAPPA NDVI area studio_28m.tif")
 
+newproj <- '+init=EPSG:3035'
+ndvi_map <- projectRaster(ndvi_map, crs=newproj)
+plot(ndvi_map)
 
-### DEFINISCO LA FUNZIONE
+
+#################################
+### DEFINISCO LA FUNZIONE ###########
 
 sampleboost <- function(ndvi, ignorance, boundary, samp_strategy, nplot, areaplot, perm, ndvi.weight, igno.weight, dist.weight){
   normalize <- function(x) {
@@ -39,40 +42,51 @@ sampleboost <- function(ndvi, ignorance, boundary, samp_strategy, nplot, areaplo
   result<-list()
   distanze<-matrix(ncol=1, nrow = perm)
   pb <- txtProgressBar(min = 0, max = perm, style = 3)
+  
+  
+  boundary <- spTransform(boundary, crs(ignorance))
+  
+  
   for (i in 1:perm){
     punti_random <- spsample(boundary, n=nplot, type= samp_strategy)
     sampling_points <- as(punti_random, "data.frame")
     xy <- sampling_points[,c(1,2)]
     
     spdf <- SpatialPointsDataFrame(coords = xy, data = sampling_points,
-                                   proj4string = CRS("+proj=longlat +datum=WGS84 +no_defs +ellps=WGS84 +towgs84=0,0,0"))
+                                   proj4string = crs(ignorance))
     
     
-    spdf_buffer <- gBuffer(spdf, width=sqrt(areaplot/pi), byid=TRUE ) #### CONTINUARE QUESTA RIGA
-    raster::intersect(spdf_buffer, spdf_buffer)
-    
+    spdf_buffer <- gBuffer(spdf, width=sqrt(areaplot/pi), byid=TRUE )
+
     # test self intersection
+    combos <- combn(nrow(spdf_buffer@data),2)
+    check <- c()
+    int <- c()
+    for(k in 1:ncol(combos)){
+      ii <- combos[1,k]
+      j <- combos[2,k]
+      
+      int[[k]] <- as.vector(is.null(raster::intersect(spdf_buffer[ii, ], spdf_buffer[j,])))
+      int <- unlist(int, use.names=FALSE)
+      check <- isFALSE(int)
+      }
+
     
-    #https://gis.stackexchange.com/questions/156660/loop-to-check-multiple-polygons-overlap-in-r
+    spectral_values <- raster::extract(ndvi, spdf) # campiono i valori del raster di NDVI
+    igno_values <- raster::extract(ignorance, spdf)  # campiono i valori del rater di ignoranza
+    
+    ## Calcolare distanze con CRS metrico
+    # 1. obtain a ppp object from imported data
+    m <- ppp(dataset_points$x, dataset_points$y, range(dataset_points$x), range(dataset_points$y))
+    # 2. calculate Euclidean distance matrix
+    pairwise_distances <- pairdist.ppp(m)
+    distanze <- sum(pairwise_distances)
     
     
+    estratti <- data.frame(coordinates(spdf),spectral_values, igno_values,  distanze)
+    names(estratti) <- c("x", "y", "ndvi", "ignorance", "distances")
     
-    
-    
-    
-    spectral_values <- raster::extract(ndvi, spdf)
-    igno_values <- raster::extract(ignorance, spdf) 
-    
-    
-    dataset_points <- cbind(xy, ID = 1:NROW(xy))
-    pairwise_distances <- distm(dataset_points[,1:2])
-    distanze[[i]] <- total.dist(pairwise_distances, method = "euclidean", square = FALSE, p = 0)
-    
-    
-   
-    
-    estratti <- data.frame(coordinates(spdf),spectral_values, igno_values,  distanze[[i]])
-    names(estratti) <- c("x", "y", "ndvi", "ignorance", "ddistances")
+    estratti$INTERSECTION <- check
     
     result[[i]]<-data.frame(estratti)
     
@@ -85,8 +99,10 @@ sampleboost <- function(ndvi, ignorance, boundary, samp_strategy, nplot, areaplo
   
   agg1<-aggregate(new_mat$ndvi,by=list(new_mat$try),FUN=var)
   agg_igno<-aggregate(new_mat$ignorance,by=list(new_mat$try),FUN=mean)
-  agg2<-data.frame(agg1, distanze, agg_igno[[2]])
-  colnames(agg2)<-c('Try','Variance','Mean Dist', 'Mean Ignorance')
+  check_igno <- "BOH"
+  
+  agg2<-data.frame(agg1, distanze, agg_igno[[2]], check_igno)
+  colnames(agg2)<-c('Try','Variance','Mean Dist', 'Mean Ignorance', "INTERSECTION")
   agg2 <- na.omit(agg2)
   
   agg2$ndvi_score <- agg2$Variance * ndvi.weight
@@ -99,8 +115,6 @@ sampleboost <- function(ndvi, ignorance, boundary, samp_strategy, nplot, areaplo
 
   agg2$FINAL_SCORE <- agg2$ndvi_norm * agg2$igno_norm * agg2$spatial_norm
   
-  
-  #####ORA c'è da normalizzare!
   
   ordered_solutions <- agg2[order(agg2[,'FINAL_SCORE'], decreasing = TRUE),]
   Index <- as.numeric(ordered_solutions[1,1])
@@ -133,7 +147,7 @@ sampleboost <- function(ndvi, ignorance, boundary, samp_strategy, nplot, areaplo
   
 }
 
-out1 <- sampleboost(ndvi = ndvi_map, ignorance = igno_map, samp_strategy='random', nplot= 20,  perm = 1000, boundary=site,
+out1 <- sampleboost(ndvi = ndvi_map, ignorance = igno_map, samp_strategy='random', nplot= 20,  areaplot = 1000, perm = 5, boundary=site,
                     ndvi.weight = 1, igno.weight=1, dist.weight=1)
 
 out1
