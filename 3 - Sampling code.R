@@ -10,7 +10,7 @@ if(!require(tibble)){install.packages("tibble"); library(tibble)}
 if(!require(tidyr)){install.packages("tidyr"); library(tidyr)} 
 if(!require(geosphere)){install.packages("geosphere"); library(geosphere)} 
 if(!require(Rfast)){install.packages("Rfast"); library(Rfast)} 
-library(sf)
+library(ggplot2)
 
 ### CARICO I LAYER
 
@@ -26,7 +26,7 @@ igno_map <- raster("MATERIALE PER LA FUNZIONE/Mappa Ignoranza 5 Km.tif")
 ndvi_map <- raster("MATERIALE PER LA FUNZIONE//MAPPA NDVI area studio_28m.tif")
 
 newproj <- '+init=EPSG:3035'
-ndvi_map <- projectRaster(ndvi_map, crs=newproj)
+ndvi_map <- projectRaster(ndvi_map, crs=newproj) # riproietto al sistema 3035
 plot(ndvi_map)
 
 
@@ -126,34 +126,38 @@ sampleboost <- function(ndvi, ignorance, boundary, samp_strategy, nplot, areaplo
   Index <- as.numeric(ordered_solutions[1,1])
   sol <- subset(new_mat[new_mat$try %in% Index,])
   sol2 <- subset(agg2[agg2$Try %in% Index,])
-  return(list("Full matrix"=new_mat, "Aggregated matrix"=agg2, "Best"= sol, "Variance of sampling points"=sol2[,'Variance'],
-              "Mean Ignorance" = sol2[,'igno_score'],
-              "Spatial Median of Distance"= sol2[,'Mean Dist'], "Final score"= sol2[,'FINAL_SCORE']))
   
   ## Plot best solution
   
   xy_out1 <- out1$Best[,c(1,2)]
-  out1_points <- SpatialPointsDataFrame(coords = xy_out1, data = out1$Best,
-                                        proj4string = crs(boundary))
-  p <- rasterVis::levelplot(x, layers=1, margin = list(FUN = median))+
-    latticeExtra::layer(sp.points(out1_points, lwd= 0.8, col='darkgray'))
+  out1_points <- SpatialPointsDataFrame(coords = xy_out1, data = out1$Best, proj4string = crs(boundary))
+ 
+   plot(site)
+   plot(out1_points, add=TRUE)
   
-  p2 <- rasterVis::levelplot(mfi2, layers=1, margin = list(FUN = median))+
-    latticeExtra::layer(sp.points(out1_points, lwd= 0.8, col='darkgray'))
+   p <- rasterVis::levelplot(ndvi, layers=1, margin = list(FUN = median))+
+        latticeExtra::layer(sp.points(out1_points, lwd= 1.5, col='black'))
+  
+   p1 <- rasterVis::levelplot(ignorance, layers=1, margin = list(FUN = median))+
+         latticeExtra::layer(sp.points(out1_points, lwd= 0.8, col='darkgray'))
   
   
-  p3 <- ggplot(out1$`Full matrix`, aes(x = ndvi, group = try)) +
-    geom_density(colour = "lightgrey")+
-    theme(legend.position = "none")+
-    geom_density(data = out1$Best, aes(x = ndvi, colour = "red"))
+   p2 <- ggplot(out1$`Full matrix`, aes(x = ndvi, group = try)) +
+         geom_density(colour = "lightgrey")+
+         theme(legend.position = "none")+
+         geom_density(data = out1$Best, aes(x = ndvi, colour = "red"))
   
-  p
-  p2
-  p3
+  
+   
+ 
+  return(list("Full matrix"=new_mat, "Aggregated matrix"=agg2, "Best"= sol, "Variance of sampling points"=sol2[,'Variance'],
+              "Mean Ignorance" = sol2[,'igno_score'],
+              "Spatial Median of Distance"= sol2[,'Mean Dist'], "Final score"= sol2[,'FINAL_SCORE'], p, p1, p2))
+  
   
 }
 
-out1 <- sampleboost(ndvi = ndvi_map, ignorance = igno_map, samp_strategy='random', nplot= 10,  areaplot = 10^6, perm = 1000, boundary=site,
+out1 <- sampleboost(ndvi = ndvi_map, ignorance = igno_map, samp_strategy='random', nplot= 10,  areaplot = 10^6, perm = 10, boundary=site,
                     ndvi.weight = 1, igno.weight=1, dist.weight=1)
 
 out1
