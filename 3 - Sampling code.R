@@ -69,16 +69,12 @@ sampleboost <- function(ndvi, ignorance, boundary, samp_strategy, nplot, areaplo
       ii <- combos[1,k]
       j <- combos[2,k]
       
-      int[k] <- gArea(raster::intersect(spdf_buffer[ii, ], spdf_buffer[j,]))
+      int[k] <- gIntersects(spdf_buffer[ii, ], spdf_buffer[j,]) # questa riga salta quando i poligoni non si intersecano
       
-      area_sum <- sum(int)
       }
       
-      if (area_sum > 0) {check[[i]] <- TRUE} else {check[[i]] <- FALSE}
+      if (any(int) == TRUE) {check[[i]] <- TRUE} else {check[[i]] <- FALSE}
       
-      
-
-    
     spectral_values <- raster::extract(ndvi, spdf) # campiono i valori del raster di NDVI
     igno_values <- raster::extract(ignorance, spdf)  # campiono i valori del rater di ignoranza
     
@@ -155,7 +151,7 @@ sampleboost <- function(ndvi, ignorance, boundary, samp_strategy, nplot, areaplo
   
 }
 
-out1 <- sampleboost(ndvi = ndvi_map, ignorance = igno_map, samp_strategy='random', nplot= 20,  areaplot = 10000000, perm = 5, boundary=site,
+out1 <- sampleboost(ndvi = ndvi_map, ignorance = igno_map, samp_strategy='random', nplot= 20,  areaplot = 10^6, perm = 30, boundary=site,
                     ndvi.weight = 1, igno.weight=1, dist.weight=1)
 
 out1
