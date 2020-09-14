@@ -38,20 +38,14 @@ sampleboost <- function(ndvi, ignorance, boundary, samp_strategy, nplot, areaplo
     return ((x - min(x)) / (max(x) - min(x)))
   } # funzione per normalizzare
   
-  
   result<-list()
   distanze<-matrix(ncol=1, nrow = perm)
   check <- c()
-  
-  
-  pb <- txtProgressBar(min = 0, max = perm, style = 3)
-  
-  
   boundary <- spTransform(boundary, crs(ignorance))
   
-  
+  pb <- txtProgressBar(min = 0, max = perm, style = 3)
   for (i in 1:perm){
-    punti_random <- spsample(boundary, n=nplot, type= samp_strategy, iter = 10)
+    punti_random <- spsample(boundary, n=nplot, type= samp_strategy, iter = 5)
     sampling_points <- as(punti_random, "data.frame")
     xy <- sampling_points[,c(1,2)]
     
@@ -129,11 +123,14 @@ sampleboost <- function(ndvi, ignorance, boundary, samp_strategy, nplot, areaplo
   
   ## Plot best solution
   
-  xy_out1 <- out1$Best[,c(1,2)]
-  out1_points <- SpatialPointsDataFrame(coords = xy_out1, data = out1$Best, proj4string = crs(boundary))
- 
-   plot(site)
-   plot(out1_points, add=TRUE)
+  xy_out1 <- sol$Best[,c(1,2)]
+  out1_points <- SpatialPointsDataFrame(coords = xy_out1, data = sol$Best, proj4string = crs(boundary))
+  out1_buffers <- gBuffer(out1_points, width=sqrt(areaplot/pi), byid=TRUE )
+  
+  site2 <- spTransform(site, newproj)
+  
+   plot(site2)
+   plot(out1_buffers, add=TRUE)
   
    p <- rasterVis::levelplot(ndvi, layers=1, margin = list(FUN = median))+
         latticeExtra::layer(sp.points(out1_points, lwd= 1.5, col='black'))
@@ -145,7 +142,7 @@ sampleboost <- function(ndvi, ignorance, boundary, samp_strategy, nplot, areaplo
    p2 <- ggplot(out1$`Full matrix`, aes(x = ndvi, group = try)) +
          geom_density(colour = "lightgrey")+
          theme(legend.position = "none")+
-         geom_density(data = out1$Best, aes(x = ndvi, colour = "red"))
+         geom_density(data = sol$Best, aes(x = ndvi, colour = "red"))
   
   
    

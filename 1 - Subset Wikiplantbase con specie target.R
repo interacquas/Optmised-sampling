@@ -1,15 +1,13 @@
 wiki <- read.csv("Wikiplantbase/Wiki_agosto2020_ignorance.csv")
 
 library(readxl)
-target <- read_excel("Wikiplantbase/Target species.xlsx", col_names = FALSE)
+target <- read_excel("Wikiplantbase/Target species.xlsx", col_names = TRUE)
+head(target)
 
-
-
-# Carico manualmente il file "Target species.xlsx" e lo chiamo 'target'
 
 is.data.frame(wiki) #controllo che sia un dataframe
 
-target <- target$...1 #creo il vettore per fare il subset
+target <- target$lista_aggancio_nomiwiki #creo il vettore per fare il subset
 is.vector(target)
 
 
@@ -19,6 +17,7 @@ write.csv(wiki_final, "wiki_final.csv", row.names = FALSE) # salvo il file wiki_
 
 wiki_list <- unique(wiki_final$Taxon) # creo la lista delle specie presenti nel dataframe
 
+wiki_list <- sort(wiki_list)
 
 setdiff(wiki_list, target) # le specie che sono nel dataframe ma non nel vettore: ovviamente il risultato deve essere un insieme vuoto
 
