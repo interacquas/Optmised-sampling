@@ -11,6 +11,7 @@ if(!require(tidyr)){install.packages("tidyr"); library(tidyr)}
 if(!require(geosphere)){install.packages("geosphere"); library(geosphere)} 
 if(!require(Rfast)){install.packages("Rfast"); library(Rfast)} 
 library(ggplot2)
+library(plot3D)
 
 ### CARICO I LAYER
 
@@ -111,7 +112,7 @@ sampleboost <- function(ndvi, ignorance, boundary, samp_strategy, nplot, areaplo
   agg2$igno_norm <- normalize(agg2$igno_score)
   agg2$spatial_norm <- normalize(agg2$spatial_score)
 
-  agg2$FINAL_SCORE <- agg2$ndvi_norm * agg2$igno_norm * agg2$spatial_norm
+  agg2$FINAL_SCORE <- agg2$ndvi_norm + agg2$igno_norm + agg2$spatial_norm
   
   agg2 <- agg2[agg2$INTERSECTION=="FALSE",] ## elimino le configurazioni dove c'è intersezione
   
@@ -123,8 +124,8 @@ sampleboost <- function(ndvi, ignorance, boundary, samp_strategy, nplot, areaplo
   
   ## Plot best solution
   
-  xy_out1 <- sol$Best[,c(1,2)]
-  out1_points <- SpatialPointsDataFrame(coords = xy_out1, data = sol$Best, proj4string = crs(boundary))
+  xy_out1 <- sol[,c(1,2)]
+  out1_points <- SpatialPointsDataFrame(coords = xy_out1, data = sol, proj4string = crs(boundary))
   out1_buffers <- gBuffer(out1_points, width=sqrt(areaplot/pi), byid=TRUE )
   
   site2 <- spTransform(site, newproj)
@@ -139,11 +140,14 @@ sampleboost <- function(ndvi, ignorance, boundary, samp_strategy, nplot, areaplo
          latticeExtra::layer(sp.points(out1_points, lwd= 0.8, col='darkgray'))
   
   
-   p2 <- ggplot(out1$`Full matrix`, aes(x = ndvi, group = try)) +
+   p2 <- ggplot(new_mat, aes(x = ndvi, group = try)) +
          geom_density(colour = "lightgrey")+
          theme(legend.position = "none")+
-         geom_density(data = sol$Best, aes(x = ndvi, colour = "red"))
+         geom_density(data = sol, aes(x = ndvi, colour = "red"))
   
+  scatter3D(agg2$ndvi_norm, agg2$igno_norm, agg2$spatial_norm, bty = "b2", colvar=as.numeric(agg2$Try), xlab="NDVI", ylab= "IGNORANCE", zlab = "SPACE" ,clab = c("Multiobjective", "Sampling Optimisation"))
+  scatter3D(x = agg2$ndvi_norm[Index], y = agg2$igno_norm[Index], z = agg2$spatial_norm[Index], add = TRUE, colkey = FALSE, 
+            pch = 18, cex = 3, col = "black")
   
    
  
@@ -154,7 +158,10 @@ sampleboost <- function(ndvi, ignorance, boundary, samp_strategy, nplot, areaplo
   
 }
 
-out1 <- sampleboost(ndvi = ndvi_map, ignorance = igno_map, samp_strategy='random', nplot= 10,  areaplot = 10^6, perm = 10, boundary=site,
+
+# Uso la funzione
+
+out1 <- sampleboost(ndvi = ndvi_map, ignorance = igno_map, samp_strategy='random', nplot= 10,  areaplot = 10^6, perm = 50, boundary=site,
                     ndvi.weight = 1, igno.weight=1, dist.weight=1)
 
 out1
