@@ -114,7 +114,7 @@ sampleboost <- function(ndvi, ignorance, boundary, samp_strategy, nplot, areaplo
 
   agg2$FINAL_SCORE <- agg2$ndvi_norm + agg2$igno_norm + agg2$spatial_norm
   
-  agg2 <- agg2[agg2$INTERSECTION=="FALSE",] ## elimino le configurazioni dove c'è intersezione
+  agg2 <- agg2[agg2$INTERSECTION=="FALSE",] ## elimino le configurazioni spaziali dove c'è intersezione
   
   
   ordered_solutions <- agg2[order(agg2[,'FINAL_SCORE'], decreasing = TRUE),]
@@ -145,9 +145,9 @@ sampleboost <- function(ndvi, ignorance, boundary, samp_strategy, nplot, areaplo
          theme(legend.position = "none")+
          geom_density(data = sol, aes(x = ndvi, colour = "red"))
   
-  scatter3D(agg2$ndvi_norm, agg2$igno_norm, agg2$spatial_norm, bty = "b2", colvar=as.numeric(agg2$Try), xlab="NDVI", ylab= "IGNORANCE", zlab = "SPACE" ,clab = c("Multiobjective", "Sampling Optimisation"))
+  scatter3D(agg2$ndvi_norm, agg2$igno_norm, agg2$spatial_norm, bty = "b2", colvar=agg2$FINAL_SCORE, xlab="NDVI", ylab= "IGNORANCE", zlab = "SPACE" ,clab = c("Multiobjective", "Sampling Optimisation"))
   scatter3D(x = agg2$ndvi_norm[Index], y = agg2$igno_norm[Index], z = agg2$spatial_norm[Index], add = TRUE, colkey = FALSE, 
-            pch = 18, cex = 3, col = "black")
+            pch = 18, cex = 3, col = "black") # riga 149 e 150 non funzionano
   
    
  
@@ -161,93 +161,8 @@ sampleboost <- function(ndvi, ignorance, boundary, samp_strategy, nplot, areaplo
 
 # Uso la funzione
 
-out1 <- sampleboost(ndvi = ndvi_map, ignorance = igno_map, samp_strategy='random', nplot= 10,  areaplot = 10^6, perm = 50, boundary=site,
+out1 <- sampleboost(ndvi = ndvi_map, ignorance = igno_map, samp_strategy='random', nplot= 10,  areaplot = 10^6, perm = 10000, boundary=site,
                     ndvi.weight = 1, igno.weight=1, dist.weight=1)
 
 out1
 
-
-
-
-
-
-##### PLOTTO LA SOLUZIONE OUT1, BEST SOLUTION
-xy_out1 <- out1$Best[,c(1,2)]
-
-out1_points <- SpatialPointsDataFrame(coords = xy_out1, data = out1$Best,
-                                      proj4string = CRS("+proj=utm +zone=32 +datum=WGS84 +units=m +no_defs +ellps=WGS84 +towgs84=0,0,0"))
-
-
-
-plot(site)
-plot(out1_points, add=TRUE)
-
-sp::plot(site)
-sp::plot(mfi2, add=TRUE)
-sp::plot(out1_points, add=TRUE)
-
-plot(mfi2)
-
-
-plot(mystratification@centroids, add=TRUE, col="red")
-
-
-#### Ordino per valori decrescenti di varianza con il quantile 0.99 #########
-out1 <- tent6
-
-
-out_filter <- na.omit(out1$`Aggregated matrix`)
-
-out_new <- out_filter[out_filter$Variance > quantile(out_filter$Variance, quantile_threshold),]
-
-ordered_solutions <- out_new[order(out_new[,2], decreasing = TRUE),]
-ordered_solutions_2 <- ordered_solutions[order(ordered_solutions[,3], decreasing = TRUE),]
-
-head(ordered_solutions_2, 10)
-
-
-########################################################################
-####### Plotto la soluzione scelta #####################################
-prova <- out1$`Full matrix`[is.element(out1$`Full matrix`$try, 3313),]
-
-xy_prova <- prova[,c(1,2)]
-
-prova_points <- SpatialPointsDataFrame(coords = xy_prova, data = prova,
-                                       proj4string = CRS("+proj=utm +zone=32 +datum=WGS84 +units=m +no_defs +ellps=WGS84 +towgs84=0,0,0"))
-
-plot(ndvi_clip)
-#plotRGB(rgb_crop, r= 1, g= 2, b = 3, stretch = "lin")
-plot(area_studio, add=TRUE)
-plot(prova_points, add=TRUE, col="black")
-
-##############################
-
-
-REFERENCE_SYSTEM <- "+proj=longlat +datum=WGS84 +no_defs +ellps=WGS84 +towgs84=0,0,0"
-file_export <- spTransform(prova_points, crs(REFERENCE_SYSTEM))
-
-
-#### salvo il csv ---- rinominare il file
-
-write.csv(file_export, "Sampling points_a.csv", row.names = TRUE)
-
-saveRDS(out1, file = "Sampling points_a.rds")
-
-
-
-
-
-
-a <- df %>% 
-  column_to_rownames("ID") %>% #make the ID the rownames. dist will use these> NB will not work on a tibble
-  dist() %>% 
-  as.matrix() %>% 
-  as.data.frame() %>% 
-  rownames_to_column(var = "ID.x") %>% #capture the row IDs
-  gather(key = ID.y, value = dist, -ID.x) %>% 
-  filter(ID.x < ID.y) %>% 
-  as_tibble()
-
-
-a <-as.data.frame(a)
-distance <- sum(a$dist)
