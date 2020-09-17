@@ -1,11 +1,6 @@
 library("plot3D")
 library("scales")
 
-normalize <- function(x) {
-  return ((x - min(x)) / (max(x) - min(x)))
-}
-
-
 
 alfa <- 1
 beta <- 0.4
