@@ -1,10 +1,13 @@
 library("plot3D")
 library("scales")
 
+normalize <- function(x) {
+  return ((x - min(x)) / (max(x) - min(x)))
+} # funzione per normalizzare
 
-alfa <- 1
-beta <- 0.4
-gamma <- 1
+alfa <- 0.2
+beta <- 1
+gamma <- 0
 
 
 
