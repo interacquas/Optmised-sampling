@@ -2,6 +2,9 @@
 
 # Carico manualmente il file "Target species.xlsx" e lo chiamo 'target'
 
+target <- Target_species
+wiki <- Wiki_agosto2020_ignorance
+
 is.data.frame(wiki) #controllo che sia un dataframe
 
 target <- target$...1 #creo il vettore per fare il subset
