@@ -12,6 +12,8 @@ if(!require(geosphere)){install.packages("geosphere"); library(geosphere)}
 if(!require(Rfast)){install.packages("Rfast"); library(Rfast)} 
 library(ggplot2)
 library(plot3D)
+library(rasterVis)
+library(RColorBrewer)
 
 ### CARICO I LAYER
 
@@ -19,10 +21,14 @@ library(plot3D)
 site <- readOGR(dsn = 'gis zone campionamento', layer = 'campionamento meno esclusione')
 
 
-# ndvi
-igno_map <- raster("MATERIALE PER LA FUNZIONE/Mappa Ignoranza 5 Km.tif")
-
 # ignoranza
+
+igno_map <- raster("MATERIALE PER LA FUNZIONE/Mappa Ignoranza 5 Km.tif")
+igno_map <- raster::crop(igno_map, site)
+#igno_map <- raster::mask(igno_map, extent(site))
+plot(igno_map)
+
+# ndvi
 
 ndvi_map <- raster("MATERIALE PER LA FUNZIONE//MAPPA NDVI area studio_28m.tif")
 
@@ -39,6 +45,8 @@ sampleboost <- function(ndvi, ignorance, boundary, samp_strategy, nplot, areaplo
     return ((x - min(x)) / (max(x) - min(x)))
   } # funzione per normalizzare
   
+  
+  start_time <- Sys.time() # misuro il tempo: start
   result<-list()
   distanze<-matrix(ncol=1, nrow = perm)
   check <- c()
@@ -74,11 +82,11 @@ sampleboost <- function(ndvi, ignorance, boundary, samp_strategy, nplot, areaplo
     igno_values <- raster::extract(ignorance, spdf)  # campiono i valori del rater di ignoranza
     
     ## Calcolare distanze con CRS metrico
-    # 1. obtain a ppp object from imported data
+    # 1. Ottengo a ppp object dai dati
     m <- ppp(xy$x, xy$y, range(xy$x), range(xy$y))
-    # 2. calculate Euclidean distance matrix
+    # 2. Calcolo una matrice di distanze euclidea
     pairwise_distances <- pairdist.ppp(m)
-    distanze[[i]] <- sum(pairwise_distances)
+    distanze[[i]] <- mean(pairwise_distances) # MEDIA DELLE DISTANZE
     distance_values <- rep(distanze[[i]], nplot)
     
     
@@ -86,7 +94,6 @@ sampleboost <- function(ndvi, ignorance, boundary, samp_strategy, nplot, areaplo
     names(estratti) <- c("x", "y", "ndvi", "ignorance", "distances")
     
     estratti$INTERSECTION <- check[[i]]
-    
     result[[i]]<-data.frame(estratti)
     
     setTxtProgressBar(pb, i)
@@ -104,11 +111,11 @@ sampleboost <- function(ndvi, ignorance, boundary, samp_strategy, nplot, areaplo
   colnames(agg2)<-c('Try','Variance','Mean Dist', 'Mean Ignorance', "INTERSECTION")
   agg2 <- na.omit(agg2)
   
-  agg2$ndvi_score <- agg2$Variance * ndvi.weight
+  agg2$ndvi_score <- agg2$Variance * ndvi.weight #applico il valore ponderato
   agg2$igno_score <- agg2$`Mean Ignorance` * igno.weight
   agg2$spatial_score <- agg2$`Mean Dist` * dist.weight
   
-  agg2$ndvi_norm <- normalize(agg2$ndvi_score)
+  agg2$ndvi_norm <- normalize(agg2$ndvi_score) # normalizzo
   agg2$igno_norm <- normalize(agg2$igno_score)
   agg2$spatial_norm <- normalize(agg2$spatial_score)
 
@@ -133,35 +140,47 @@ sampleboost <- function(ndvi, ignorance, boundary, samp_strategy, nplot, areaplo
    plot(site2)
    plot(out1_buffers, add=TRUE)
   
-   p <- rasterVis::levelplot(ndvi, layers=1, margin = list(FUN = median))+
+   
+   mytheme <- rasterTheme(region = brewer.pal(9, "YlGn"))
+   p <- rasterVis::levelplot(ndvi, layers=1, margin = list(FUN = median), par.settings = mytheme)+
         latticeExtra::layer(sp.points(out1_points, lwd= 1.5, col='black'))
   
-   p1 <- rasterVis::levelplot(ignorance, layers=1, margin = list(FUN = median))+
+   p1 <- rasterVis::levelplot(ignorance, layers=1, margin = list(FUN = median), par.settings = RdBuTheme)+
          latticeExtra::layer(sp.points(out1_points, lwd= 0.8, col='darkgray'))
   
   
-   p2 <- ggplot(new_mat, aes(x = ndvi, group = try)) +
+   
+   
+   
+  if (nrow(new_mat) > 1000) {new_mat <- sample_n(newmat, 1000)}
+    
+  
+  p2 <-  ggplot(new_mat, aes(x = ndvi, group = try)) +
          geom_density(colour = "lightgrey")+
          theme(legend.position = "none")+
          geom_density(data = sol, aes(x = ndvi, colour = "red"))
   
+  
+  index_graph <- match(max(agg2$FINAL_SCORE), agg2$FINAL_SCORE)
   scatter3D(agg2$ndvi_norm, agg2$igno_norm, agg2$spatial_norm, bty = "b2", colvar=agg2$FINAL_SCORE, xlab="NDVI", ylab= "IGNORANCE", zlab = "SPACE" ,clab = c("Multiobjective", "Sampling Optimisation"))
-  scatter3D(x = agg2$ndvi_norm[Index], y = agg2$igno_norm[Index], z = agg2$spatial_norm[Index], add = TRUE, colkey = FALSE, 
+  scatter3D(x = agg2$ndvi_norm[index_graph], y = agg2$igno_norm[index_graph], z = agg2$spatial_norm[index_graph], add = TRUE, colkey = FALSE, 
             pch = 18, cex = 3, col = "black") # riga 149 e 150 non funzionano
   
-   
+  end_time <- Sys.time()
+  message()
+  message(paste0(end_time-start_time))
  
   return(list("Full matrix"=new_mat, "Aggregated matrix"=agg2, "Best"= sol, "Variance of sampling points"=sol2[,'Variance'],
               "Mean Ignorance" = sol2[,'igno_score'],
               "Spatial Median of Distance"= sol2[,'Mean Dist'], "Final score"= sol2[,'FINAL_SCORE'], p, p1, p2))
   
-  
+
 }
 
 
 # Uso la funzione
 
-out1 <- sampleboost(ndvi = ndvi_map, ignorance = igno_map, samp_strategy='random', nplot= 10,  areaplot = 10^6, perm = 10000, boundary=site,
+out1 <- sampleboost(ndvi = ndvi_map, ignorance = igno_map, samp_strategy='random', nplot= 10,  areaplot = 10^6, perm = 10^5, boundary=site,
                     ndvi.weight = 1, igno.weight=1, dist.weight=1)
 
 out1
