@@ -23,7 +23,7 @@ site <- readOGR(dsn = 'gis zone campionamento', layer = 'campionamento meno escl
 
 # ignoranza
 
-igno_map <- raster("MATERIALE PER LA FUNZIONE/Mappa Ignoranza 5 Km.tif")
+igno_map <- raster("MATERIALE PER LA FUNZIONE/Mappa Ignoranza 2 Km.tif")
 #igno_map <- raster::crop(igno_map, site)
 #igno_map <- raster::mask(igno_map, extent(site))
 plot(igno_map)
@@ -152,7 +152,7 @@ sampleboost <- function(ndvi, ignorance, boundary, samp_strategy, nplot, areaplo
    
    
    
-  if (nrow(new_mat) > 1000) {new_mat <- sample_n(newmat, 1000)}
+  if (nrow(new_mat) > 1000) {new_mat <- sample_n(new_mat, 1000)}
     
   
   p2 <-  ggplot(new_mat, aes(x = ndvi, group = try)) +
@@ -180,7 +180,7 @@ sampleboost <- function(ndvi, ignorance, boundary, samp_strategy, nplot, areaplo
 
 # Uso la funzione
 
-out1 <- sampleboost(ndvi = ndvi_map, ignorance = igno_map, samp_strategy='random', nplot= 10,  areaplot = 10^6, perm = 100, boundary=site,
+out1 <- sampleboost(ndvi = ndvi_map, ignorance = igno_map, samp_strategy='random', nplot= 15,  areaplot = 10^6, perm = 10^2, boundary=site,
                     ndvi.weight = 1, igno.weight=1, dist.weight=1)
 
 out1
