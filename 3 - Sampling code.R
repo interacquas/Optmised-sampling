@@ -86,7 +86,9 @@ sampleboost <- function(ndvi, ignorance, boundary, samp_strategy, nplot, areaplo
     m <- ppp(xy$x, xy$y, range(xy$x), range(xy$y))
     # 2. Calcolo una matrice di distanze euclidea
     pairwise_distances <- pairdist.ppp(m)
-    distanze[[i]] <- mean(pairwise_distances) # MEDIA DELLE DISTANZE
+    #distanze[[i]] <- mean(pairwise_distances) # MEDIA DELLE DISTANZE
+    pairwise_distances[pairwise_distances == 0] <- NA # sostituisco gli 0 della diagonale con NA
+    distanze[[i]] <- min(pairwise_distances, na.rm =TRUE) # distanza minima tra coppie di plot (idea Giuseppe)
     distance_values <- rep(distanze[[i]], nplot)
     
     
@@ -180,7 +182,7 @@ sampleboost <- function(ndvi, ignorance, boundary, samp_strategy, nplot, areaplo
 
 # Uso la funzione
 
-out1 <- sampleboost(ndvi = ndvi_map, ignorance = igno_map, samp_strategy='random', nplot= 10,  areaplot = 10^6, perm = 100, boundary=site,
+out1 <- sampleboost(ndvi = ndvi_map, ignorance = igno_map, samp_strategy='random', nplot= 10,  areaplot = 10^6, perm = 30, boundary=site,
                     ndvi.weight = 1, igno.weight=1, dist.weight=1)
 
 out1
