@@ -29,6 +29,7 @@
 "Odontites luteus (L.) Clairv. subsp. luteus",10.748933,43.222324,1784.12411615277,2003
 "Arbutus unedo L.",11.046116,43.820191,1784.12411615277,1963
 "Erica multiflora L. subsp. multiflora",11.145667,42.411119,1784.12411615277,1843
+"Colchicum neapolitanum (Ten.) Ten. subsp. neapolitanum",10.642306,43.659125,1784.12411615277,1890
 "Lipandra polysperma (L.) S.Fuentes, Uotila & Borsch",11.103552,43.942612,1784.12411615277,2013
 "Colchicum lusitanum Brot.",10.748933,43.222324,1784.12411615277,2003
 "Colchicum lusitanum Brot.",10.599424,43.420422,1784.12411615277,2009
@@ -199,6 +200,7 @@
 "Smilax aspera L.",10.27416,42.79867,564.189583547756,2005
 "Smilax aspera L.",10.2041,42.79311,564.189583547756,2005
 "Euphorbia dendroides L.",11.081389,42.418528,1784.12411615277,1870
+"Colchicum neapolitanum (Ten.) Ten. subsp. neapolitanum",11.39169,42.889722,1784.12411615277,2000
 "Arbutus unedo L.",10.294157,42.334467,1784.12411615277,1974
 "Arbutus unedo L.",10.512329,43.779295,1784.12411615277,1980
 "Calluna vulgaris (L.) Hull",10.296885,44.141195,1784.12411615277,1996
@@ -820,6 +822,7 @@
 "Sesleria autumnalis (Scop.) F.W.Schultz",10.0253677368164,44.1477250338098,1784.12411615277,1860
 "Sesleria autumnalis (Scop.) F.W.Schultz",10.112225,44.084105,1784.12411615277,1860
 "Sesleria autumnalis (Scop.) F.W.Schultz",10.190445,44.080163,1784.12411615277,1860
+"Colchicum neapolitanum (Ten.) Ten. subsp. neapolitanum",10.711789,43.431076,1784.12411615277,2006
 "Sesleria autumnalis (Scop.) F.W.Schultz",10.08917,44.077388,1784.12411615277,1942
 "Odontites luteus (L.) Clairv. subsp. luteus",10.294215,42.78222,3989.42280401433,1908
 "Calluna vulgaris (L.) Hull",10.335535,43.739605,1784.12411615277,1951
@@ -904,6 +907,7 @@
 "Smilax aspera L.",10.447397,43.756442,1784.12411615277,1981
 "Panicum dichotomiflorum Michx.",10.853141,43.989255,564.189583547756,2012
 "Symphyotrichum novi-belgii (L.) G.L.Nesom",10.614911,43.838724,1784.12411615277,1908
+"Symphyotrichum ×salignum (Willd.) G.L.Nesom",10.283985,43.682555,1784.12411615277,1908
 "Symphyotrichum novi-belgii (L.) G.L.Nesom",10.629107,43.782514,1784.12411615277,1908
 "Cyclamen hederifolium Aiton subsp. hederifolium",11.553028,43.730966,1784.12411615277,1908
 "Odontites luteus (L.) Clairv. subsp. luteus",11.145667,42.411119,1784.12411615277,1908
@@ -1126,6 +1130,7 @@
 "Calluna vulgaris (L.) Hull",11.33327,43.894822,1784.12411615277,1866
 "Calluna vulgaris (L.) Hull",11.881327,43.796371,3989.42280401433,1867
 "Oxybasis rubra (L.) S.Fuentes, Uotila & Borsch",9.83481060204053,43.0420543701851,1784.12411615277,2012
+"Oenothera oehlkersi Kappus ex Rostanski",10.2275076,43.9041519,564.189583547756,2017
 "Calluna vulgaris (L.) Hull",11.553028,43.730966,1784.12411615277,1902
 "Smilax aspera L.",10.265603,43.804015,564.189583547756,2006
 "Seseli tortuosum L. subsp. tortuosum",10.265603,43.804015,564.189583547756,2006
@@ -1134,16 +1139,20 @@
 "Colchicum autumnale L. subsp. autumnale",9.752317,44.355095,1784.12411615277,2012
 "Colchicum autumnale L. subsp. autumnale",10.426059,44.2247,1784.12411615277,2005
 "Arbutus unedo L.",11.168726,43.894235,1784.12411615277,2016
+"Colchicum neapolitanum (Ten.) Ten. subsp. neapolitanum",10.495083,43.837609,1784.12411615277,1954
 "Arbutus unedo L.",11.201621,43.878069,1784.12411615277,2016
 "Arbutus unedo L.",11.23397,43.87897,1784.12411615277,2016
 "Calluna vulgaris (L.) Hull",11.168726,43.894235,1784.12411615277,2016
 "Calluna vulgaris (L.) Hull",11.157338,43.96659,1784.12411615277,2016
 "Colchicum autumnale L. subsp. autumnale",10.673868,44.140557,1784.12411615277,1857
 "Colchicum autumnale L. subsp. autumnale",10.663661,44.144682,1784.12411615277,1955
+"Colchicum neapolitanum (Ten.) Ten. subsp. neapolitanum",11.67666,42.86515,1784.12411615277,1919
+"Colchicum neapolitanum (Ten.) Ten. subsp. neapolitanum",11.66666,42.76637,1784.12411615277,2008
 "Colchicum autumnale L. subsp. autumnale",10.75498,44.10015,1784.12411615277,1868
 "Colchicum autumnale L. subsp. autumnale",10.280701,44.021288,1784.12411615277,1869
 "Colchicum autumnale L. subsp. autumnale",9.938858,44.331645,1784.12411615277,1923
 "Colchicum autumnale L. subsp. autumnale",11.094046,43.085071,1784.12411615277,2012
+"Colchicum neapolitanum (Ten.) Ten. subsp. neapolitanum",10.495083,43.837609,1784.12411615277,1949
 "Seseli tortuosum L. subsp. tortuosum",10.265411,43.804037,564.189583547756,2006
 "Seseli tortuosum L. subsp. tortuosum",10.263303,43.804556,564.189583547756,2006
 "Seseli tortuosum L. subsp. tortuosum",10.268402,43.795227,564.189583547756,2005
@@ -1313,11 +1322,15 @@
 "Oenothera biennis L.",10.263949,43.860607,1784.12411615277,1961
 "Allium savii Parl.",10.322591,43.595669,1784.12411615277,1860
 "Oenothera biennis L.",10.263949,43.860607,1784.12411615277,1961
+"Oenothera stricta Link subsp. stricta",10.263949,43.860607,1784.12411615277,1961
 "Oenothera laciniata Hill",10.263949,43.860607,1784.12411615277,1961
 "Hedera helix L. subsp. helix",10.308114,43.825336,564.189583547756,2006
 "Oenothera laciniata Hill",10.266177,43.868904,1784.12411615277,1961
 "Oenothera laciniata Hill",10.300656,43.884653,1784.12411615277,1961
 "Dittrichia viscosa (L.) Greuter subsp. viscosa",10.251594549045,43.8355338938101,564.189583547756,1961
+"Oenothera stricta Link subsp. stricta",10.2578773512505,43.866977068666,1784.12411615277,1961
+"Oenothera stricta Link subsp. stricta",10.281874,43.873463,1784.12411615277,1961
+"Oenothera stricta Link subsp. stricta",10.300656,43.884653,1784.12411615277,1961
 "Oenothera biennis L.",10.255734444363,43.8665851639344,1784.12411615277,1961
 "Oenothera biennis L.",10.281874,43.873463,1784.12411615277,1961
 "Oenothera biennis L.",10.300656,43.884653,1784.12411615277,1961
@@ -1429,6 +1442,7 @@
 "Dysphania ambrosioides (L.) Mosyakin & Clemants",10.169883,43.958643,1784.12411615277,1908
 "Lipandra polysperma (L.) S.Fuentes, Uotila & Borsch",10.119153,43.996371,1784.12411615277,1942
 "Dysphania ambrosioides (L.) Mosyakin & Clemants",10.408895,43.709389,1784.12411615277,1908
+"Colchicum neapolitanum (Ten.) Ten. subsp. neapolitanum",11.250999,42.426153,1784.12411615277,1908
 "Lipandra polysperma (L.) S.Fuentes, Uotila & Borsch",10.121559,44.010688,1784.12411615277,1942
 "Dysphania ambrosioides (L.) Mosyakin & Clemants",10.3716087341309,43.7063525930413,1784.12411615277,1908
 "Colchicum longifolium Castagne",11.338304,42.537921,1784.12411615277,1908
@@ -1649,10 +1663,12 @@
 "Oenothera stucchii Soldano",10.516078,43.895329,1784.12411615277,1982
 "Cervaria rivinii Gaertn.",10.178842,44.082047,1784.12411615277,1942
 "Oenothera chicaginensis de Vries ex Renner & Cleland",10.509453,43.963622,1784.12411615277,1982
+"Oenothera oehlkersi Kappus ex Rostanski",10.24614,43.855544,1784.12411615277,1969
 "Oenothera stucchii Soldano",10.488867,43.738712,1784.12411615277,1982
 "Dittrichia viscosa (L.) Greuter subsp. viscosa",11.100882,42.252801,1784.12411615277,1886
 "Oenothera chicaginensis de Vries ex Renner & Cleland",10.389299,44.102725,1784.12411615277,1982
 "Oenothera chicaginensis de Vries ex Renner & Cleland",10.148917,43.974702,1784.12411615277,1981
+"Oenothera oehlkersi Kappus ex Rostanski",10.509453,43.963622,1784.12411615277,1983
 "Oenothera chicaginensis de Vries ex Renner & Cleland",10.168448,44.057274,1784.12411615277,1982
 "Oenothera glazioviana Micheli",10.593615,44.010372,1784.12411615277,1976
 "Oenothera glazioviana Micheli",9.927099,44.183481,1784.12411615277,1980
@@ -1688,6 +1704,7 @@
 "Ceratonia siliqua L.",10.296201,42.33362,564.189583547756,1957
 "Ceratonia siliqua L.",10.294157,42.334467,564.189583547756,1964
 "Symphyotrichum lanceolatum (Willd.) G.L.Nesom",11.168726,43.894235,1784.12411615277,2016
+"Symphyotrichum ×salignum (Willd.) G.L.Nesom",11.149001,43.924799,3989.42280401433,2016
 "Symphyotrichum squamatum (Spreng.) G.L.Nesom",11.149001,43.924799,3989.42280401433,2016
 "Symphyotrichum squamatum (Spreng.) G.L.Nesom",11.157338,43.96659,3989.42280401433,2016
 "Symphyotrichum squamatum (Spreng.) G.L.Nesom",11.164831,44.001953,3989.42280401433,2016
@@ -1901,6 +1918,7 @@
 "Hedera helix L. subsp. helix",10.307318,43.692065,564.189583547756,2015
 "Spiranthes spiralis (L.) Chevall.",10.32169,42.811767,1784.12411615277,1908
 "Hedera helix L. subsp. helix",10.308048,43.691057,564.189583547756,2015
+"Colchicum neapolitanum (Ten.) Ten. subsp. neapolitanum",10.328407,43.718316,1784.12411615277,1956
 "Hedera helix L. subsp. helix",10.306871,43.690449,564.189583547756,2015
 "Smilax aspera L.",10.306871,43.690449,564.189583547756,2015
 "Smilax aspera L.",10.343478,43.742106,1784.12411615277,1956
@@ -2026,6 +2044,7 @@
 "Dittrichia viscosa (L.) Greuter subsp. viscosa",10.9565915994888,43.6950752780694,564.189583547756,2018
 "Smilax aspera L.",11.3507670120706,43.7638812189489,564.189583547756,2018
 "Artemisia verlotiorum Lamotte",10.9231599393975,43.7246352469728,564.189583547756,2018
+"Galatella pannonica (Jacq.) Galasso, Bartolucci & Ardenghi subsp. tripolium (L.) Galasso, Bartolucci & Ardenghi",10.3078538107757,43.7159932180935,1784.12411615277,2004
 "Arbutus unedo L.",11.3507670120706,43.7638812189489,564.189583547756,2018
 "Arbutus unedo L.",11.3449771984565,43.7645244997115,564.189583547756,1946
 "Hedera helix L. subsp. helix",10.9565915994888,43.6950752780694,564.189583547756,2018
@@ -2173,6 +2192,11 @@
 "Symphyotrichum squamatum (Spreng.) G.L.Nesom",10.9484154220452,43.7239099701465,564.189583547756,2018
 "Hibiscus trionum L.",10.9363744363835,43.6580853396351,564.189583547756,2018
 "Odontites luteus (L.) Clairv. subsp. luteus",10.9815317440501,43.681415277863,564.189583547756,2018
+"Colchicum neapolitanum (Ten.) Ten. subsp. neapolitanum",10.343975,43.677622,1784.12411615277,1956
+"Colchicum neapolitanum (Ten.) Ten. subsp. neapolitanum",11.108057,42.669159,1784.12411615277,1869
+"Colchicum neapolitanum (Ten.) Ten. subsp. neapolitanum",10.537587,43.874631,1784.12411615277,1955
+"Colchicum neapolitanum (Ten.) Ten. subsp. neapolitanum",9.799782,44.319926,1784.12411615277,1893
+"Colchicum neapolitanum (Ten.) Ten. subsp. neapolitanum",11.338304,42.537921,1784.12411615277,1905
 "Hedera helix L. subsp. helix",10.33476702,43.71929092,564.189583547756,2014
 "Smilax aspera L.",10.33568627,43.71573552,564.189583547756,2014
 "Artemisia verlotiorum Lamotte",10.9008023618215,43.6921507893241,564.189583547756,2018
@@ -2289,6 +2313,9 @@
 "Dittrichia viscosa (L.) Greuter subsp. viscosa",9.966887,44.223032,1784.12411615277,1942
 "Symphyotrichum squamatum (Spreng.) G.L.Nesom",11.02021,42.658441,1784.12411615277,2003
 "Hedera helix L. subsp. helix",11.4826292169182,43.8158215005934,564.189583547756,2018
+"Galatella pannonica (Jacq.) Galasso, Bartolucci & Ardenghi subsp. tripolium (L.) Galasso, Bartolucci & Ardenghi",10.999835,42.70294,1784.12411615277,2003
+"Galatella pannonica (Jacq.) Galasso, Bartolucci & Ardenghi subsp. tripolium (L.) Galasso, Bartolucci & Ardenghi",11.036864,42.682166,1784.12411615277,2003
+"Galatella pannonica (Jacq.) Galasso, Bartolucci & Ardenghi subsp. tripolium (L.) Galasso, Bartolucci & Ardenghi",11.072238,42.639402,1784.12411615277,2003
 "Dittrichia viscosa (L.) Greuter subsp. viscosa",11.4790243280022,43.8126628457671,564.189583547756,2018
 "Colchicum longifolium Castagne",11.008472,43.168272,1784.12411615277,2008
 "Dittrichia viscosa (L.) Greuter subsp. viscosa",10.9622593118972,43.6990288757935,564.189583547756,2018
@@ -2350,6 +2377,9 @@
 "Erica multiflora L. subsp. multiflora",11.044449,42.673545,3989.42280401433,2003
 "Cervaria rivinii Gaertn.",10.657071,43.430729,1784.12411615277,2014
 "Erica multiflora L. subsp. multiflora",11.145667,42.411119,1784.12411615277,1872
+"Halocnemum cruciatum (Forrsk.) Tod.",11.021258,42.687615,1784.12411615277,2003
+"Halocnemum cruciatum (Forrsk.) Tod.",11.008205,42.674472,1784.12411615277,2003
+"Halocnemum cruciatum (Forrsk.) Tod.",11.02021,42.658441,1784.12411615277,2003
 "Calluna vulgaris (L.) Hull",11.29431,44.13416,1784.12411615277,1966
 "Charybdis maritima (L.) Speta",10.301133,42.329475,564.189583547756,1964
 "Colchicum lusitanum Brot.",12.29114,43.75999,1784.12411615277,1966
@@ -2364,6 +2394,15 @@
 "Hedera helix L. subsp. helix",10.280587,43.715956,1784.12411615277,1956
 "Calluna vulgaris (L.) Hull",11.65,43.93223,1784.12411615277,1966
 "Hedera helix L. subsp. helix",11.258675,43.746274,1784.12411615277,1908
+"Reynoutria ×bohemica Chrtek & Chrtková",11.247864,43.803531,1784.12411615277,1987
+"Reynoutria ×bohemica Chrtek & Chrtková",11.247864,43.803531,1784.12411615277,1987
+"Reynoutria ×bohemica Chrtek & Chrtková",11.255868,43.783279,1784.12411615277,1988
+"Reynoutria ×bohemica Chrtek & Chrtková",11.019378,43.86303,1784.12411615277,2006
+"Reynoutria ×bohemica Chrtek & Chrtková",11.847354,43.498676,1784.12411615277,2003
+"Reynoutria ×bohemica Chrtek & Chrtková",11.875472,43.576924,1784.12411615277,2006
+"Reynoutria ×bohemica Chrtek & Chrtková",11.877997,43.605933,1784.12411615277,2005
+"Reynoutria ×bohemica Chrtek & Chrtková",11.875472,43.576924,1784.12411615277,2005
+"Reynoutria ×bohemica Chrtek & Chrtková",11.875472,43.576924,1784.12411615277,2005
 "Artemisia verlotiorum Lamotte",10.9645029902458,43.7344761851411,564.189583547756,2017
 "Calluna vulgaris (L.) Hull",10.9288322925568,43.6935076551963,564.189583547756,2017
 "Hedera helix L. subsp. helix",10.9288322925568,43.6935076551963,564.189583547756,2017
@@ -2431,6 +2470,7 @@
 "Sternbergia lutea (L.) Ker Gawl. ex Spreng.",11.886541,43.662551,1784.12411615277,1908
 "Erica multiflora L. subsp. multiflora",11.145667,42.411119,1784.12411615277,1881
 "Callitriche brutia Petagna",11.393453,42.488764,1784.12411615277,2006
+"Galatella pannonica (Jacq.) Galasso, Bartolucci & Ardenghi subsp. tripolium (L.) Galasso, Bartolucci & Ardenghi",10.296208,43.733839,1784.12411615277,1956
 "Spiranthes spiralis (L.) Chevall.",10.594785,43.746474,1784.12411615277,2009
 "Spiranthes spiralis (L.) Chevall.",10.557218,43.707474,1784.12411615277,2009
 "Symphyotrichum squamatum (Spreng.) G.L.Nesom",10.541711,43.768655,1784.12411615277,2009
@@ -2485,8 +2525,10 @@
 "Solanum chenopodioides Lam.",10.412079,43.819508,1784.12411615277,2014
 "Cyclamen hederifolium Aiton subsp. hederifolium",10.284682,43.729683,1784.12411615277,1956
 "Symphyotrichum squamatum (Spreng.) G.L.Nesom",10.31346945,43.85144473,564.189583547756,2015
+"Galatella pannonica (Jacq.) Galasso, Bartolucci & Ardenghi subsp. tripolium (L.) Galasso, Bartolucci & Ardenghi",10.298492669859,43.6916579002549,1784.12411615277,2007
 "Symphyotrichum squamatum (Spreng.) G.L.Nesom",10.35415251,43.83877024,564.189583547756,2015
 "Salicornia perennans Willd. subsp. perennans",10.298492669859,43.6916579002549,1784.12411615277,2007
+"Galatella pannonica (Jacq.) Galasso, Bartolucci & Ardenghi subsp. tripolium (L.) Galasso, Bartolucci & Ardenghi",10.293860757704,43.5895327572661,564.189583547756,2009
 "Hedera helix L. subsp. helix",10.293860757704,43.5895327572661,564.189583547756,2009
 "Calluna vulgaris (L.) Hull",11.29431,44.13416,1784.12411615277,2001
 "Symphyotrichum novi-belgii (L.) G.L.Nesom",10.925134,42.773994,1784.12411615277,1999
@@ -2504,8 +2546,10 @@
 "Prospero autumnale (L.) Speta",10.3485791149984,43.701635920483,1784.12411615277,2018
 "Oenothera italica Rostanski & Soldano",10.263949,43.860607,1784.12411615277,1979
 "Oenothera italica Rostanski & Soldano",10.263949,43.860607,1784.12411615277,1979
+"Galatella pannonica (Jacq.) Galasso, Bartolucci & Ardenghi subsp. tripolium (L.) Galasso, Bartolucci & Ardenghi",10.328407,43.718316,1784.12411615277,1956
 "Callitriche brutia Petagna",10.805938,43.772981,564.189583547756,2018
 "Calluna vulgaris (L.) Hull",11.417321,43.956242,1784.12411615277,1966
+"Galatella pannonica (Jacq.) Galasso, Bartolucci & Ardenghi subsp. tripolium (L.) Galasso, Bartolucci & Ardenghi",10.315396,43.731042,564.189583547756,1956
 "Digitaria debilis (Desf.) Willd.",10.3078538107757,43.7159932180935,1784.12411615277,2004
 "Arbutus unedo L.",10.6201523442955,43.0712978963848,564.189583547756,2017
 "Salicornia perennans Willd. subsp. perennans",10.28238259,43.70251295,564.189583547756,2006
@@ -2560,6 +2604,7 @@
 "Spiranthes spiralis (L.) Chevall.",10.563487,43.782115,1784.12411615277,2013
 "Spiranthes spiralis (L.) Chevall.",10.136072118892,43.9866408588245,1784.12411615277,2019
 "Calluna vulgaris (L.) Hull",10.9549396131124,43.8195819860495,564.189583547756,2019
+"Colchicum neapolitanum (Ten.) Ten. subsp. neapolitanum",10.279746,43.718821,1784.12411615277,1954
 "Dittrichia viscosa (L.) Greuter subsp. viscosa",10.2780215861882,43.7158948023056,1784.12411615277,2006
 "Calluna vulgaris (L.) Hull",10.818558,44.054447,1784.12411615277,1929
 "Cyclamen hederifolium Aiton subsp. hederifolium",10.390921,43.637023,1784.12411615277,2016
@@ -2568,9 +2613,14 @@
 "Smilax aspera L.",10.390921,43.637023,1784.12411615277,2016
 "Artemisia verlotiorum Lamotte",10.9740781309266,43.7238678701355,564.189583547756,2019
 "Dittrichia viscosa (L.) Greuter subsp. viscosa",10.328653,43.598311,564.189583547756,2013
+"Galatella pannonica (Jacq.) Galasso, Bartolucci & Ardenghi subsp. tripolium (L.) Galasso, Bartolucci & Ardenghi",10.308246,43.588471,564.189583547756,2013
+"Galatella pannonica (Jacq.) Galasso, Bartolucci & Ardenghi subsp. tripolium (L.) Galasso, Bartolucci & Ardenghi",10.30831,43.589173,564.189583547756,2013
 "Arbutus unedo L.",10.2885197358157,43.6194705428884,564.189583547756,2014
+"Galatella pannonica (Jacq.) Galasso, Bartolucci & Ardenghi subsp. tripolium (L.) Galasso, Bartolucci & Ardenghi",10.30793,43.588196,564.189583547756,2013
+"Galatella pannonica (Jacq.) Galasso, Bartolucci & Ardenghi subsp. tripolium (L.) Galasso, Bartolucci & Ardenghi",10.308641,43.58898,564.189583547756,2013
 "Panicum dichotomiflorum Michx.",10.944997,43.79569,1784.12411615277,2013
 "Panicum dichotomiflorum Michx.",11.008753,43.752336,1784.12411615277,2013
+"Galatella pannonica (Jacq.) Galasso, Bartolucci & Ardenghi subsp. tripolium (L.) Galasso, Bartolucci & Ardenghi",10.336728,43.600414,564.189583547756,2013
 "Panicum dichotomiflorum Michx.",11.000082,43.784295,1784.12411615277,2013
 "Salicornia perennans Willd. subsp. perennans",10.294386,43.68732,564.189583547756,2013
 "Salicornia perennans Willd. subsp. perennans",10.315503,43.590675,564.189583547756,2013
@@ -2585,6 +2635,7 @@
 "Helianthus tuberosus L.",11.378271,43.148646,1784.12411615277,2018
 "Smilax aspera L.",10.2885197358157,43.6194705428884,564.189583547756,2014
 "Dittrichia viscosa (L.) Greuter subsp. viscosa",10.345295,43.603474,564.189583547756,2013
+"Galatella pannonica (Jacq.) Galasso, Bartolucci & Ardenghi subsp. tripolium (L.) Galasso, Bartolucci & Ardenghi",10.308194,43.589516,564.189583547756,2013
 "Cervaria rivinii Gaertn.",11.103552,43.942612,1784.12411615277,2013
 "Cyclamen hederifolium Aiton subsp. hederifolium",11.378271,43.148646,1784.12411615277,2018
 "Smilax aspera L.",11.341239,43.684267,1784.12411615277,2019
@@ -2610,6 +2661,7 @@
 "Dittrichia viscosa (L.) Greuter subsp. viscosa",10.1884242244638,43.9441430119087,1784.12411615277,1986
 "Hedera helix L. subsp. helix",10.3078538107756,43.7159932180934,1784.12411615277,2004
 "Arbutus unedo L.",10.1884242244638,43.9441430119087,1784.12411615277,1986
+"Oenothera stricta Link subsp. stricta",10.1884242244638,43.9441430119087,1784.12411615277,1986
 "Calluna vulgaris (L.) Hull",10.1884242244638,43.9441430119087,1784.12411615277,1986
 "Salicornia perennans Willd. subsp. perennans",10.3078538107756,43.7159932180934,1784.12411615277,2004
 "Smilax aspera L.",10.3078538107756,43.7159932180934,1784.12411615277,2004
@@ -2619,12 +2671,15 @@
 "Salicornia perennans Willd. subsp. perennans",10.331677,43.594999,564.189583547756,2013
 "Dittrichia viscosa (L.) Greuter subsp. viscosa",10.292502,43.690871,564.189583547756,2013
 "Euphorbia dendroides L.",11.100882,42.252801,1784.12411615277,1882
+"Galatella pannonica (Jacq.) Galasso, Bartolucci & Ardenghi subsp. tripolium (L.) Galasso, Bartolucci & Ardenghi",10.333898,43.59572,564.189583547756,2013
 "Salicornia perennans Willd. subsp. perennans",10.333898,43.59572,564.189583547756,2013
 "Salicornia perennans Willd. subsp. perennans",10.293286,43.688665,564.189583547756,2013
 "Salicornia perennans Willd. subsp. perennans",10.308167,43.588841,564.189583547756,2013
 "Salicornia perennans Willd. subsp. perennans",10.336561,43.597913,564.189583547756,2013
 "Salicornia perennans Willd. subsp. perennans",10.291988,43.690615,564.189583547756,2013
+"Galatella pannonica (Jacq.) Galasso, Bartolucci & Ardenghi subsp. tripolium (L.) Galasso, Bartolucci & Ardenghi",10.308167,43.588841,564.189583547756,2013
 "Salicornia perennans Willd. subsp. perennans",10.328707,43.596798,564.189583547756,2013
+"Galatella pannonica (Jacq.) Galasso, Bartolucci & Ardenghi subsp. tripolium (L.) Galasso, Bartolucci & Ardenghi",10.337659,43.598828,564.189583547756,2013
 "Salicornia perennans Willd. subsp. perennans",10.284933,43.701895,564.189583547756,2013
 "Salicornia perennans Willd. subsp. perennans",10.337659,43.598828,564.189583547756,2013
 "Salicornia perennans Willd. subsp. perennans",10.295115,43.687771,564.189583547756,2013
@@ -2688,6 +2743,7 @@
 "Dittrichia viscosa (L.) Greuter subsp. viscosa",10.30046,43.58584,564.189583547756,2018
 "Dittrichia viscosa (L.) Greuter subsp. viscosa",10.35298,43.60451,564.189583547756,2018
 "Solanum chenopodioides Lam.",10.35298,43.60451,564.189583547756,2018
+"Oenothera grandiflora L'Hér.",10.169883,43.958643,1784.12411615277,1907
 "Calluna vulgaris (L.) Hull",11.4211620245402,43.843939458127,1784.12411615277,2018
 "Tradescantia fluminensis Vell.",10.3528952875427,43.8401926670718,1784.12411615277,2019
 "Hedera helix L. subsp. helix",11.4146671890562,43.818031302847,1784.12411615277,2018
@@ -2717,6 +2773,7 @@
 "Helianthus tuberosus L.",11.36271,43.07674,1784.12411615277,1999
 "Pulicaria vulgaris Gaertn.",11.4054501683621,43.7914917702774,1784.12411615277,2018
 "Hedera helix L. subsp. helix",11.515,43.800803,1784.12411615277,2017
+"Symphyotrichum ×salignum (Willd.) G.L.Nesom",11.070076,43.930648,1784.12411615277,2002
 "Cyclamen hederifolium Aiton subsp. hederifolium",11.466088,43.785629,1784.12411615277,2017
 "Arbutus unedo L.",10.986328125,43.4572802899408,1784.12411615277,2017
 "Hedera helix L. subsp. helix",10.986328125,43.4572802899408,1784.12411615277,2017
@@ -2764,6 +2821,7 @@
 "Sternbergia colchiciflora Waldst. & Kit.",11.66666,42.76637,1784.12411615277,2008
 "Colchicum autumnale L. subsp. autumnale",9.867101,44.375487,1784.12411615277,1954
 "Colchicum lusitanum Brot.",11.261023,43.845046,1784.12411615277,1954
+"Colchicum neapolitanum (Ten.) Ten. subsp. neapolitanum",10.949922,43.161434,1784.12411615277,2001
 "Oxybasis urbica (L.) S.Fuentes, Uotila & Borsch",11.868945,42.9473,1784.12411615277,1998
 "Tradescantia fluminensis Vell.",10.256563,44.001168,3989.42280401433,1980
 "Dittrichia viscosa (L.) Greuter subsp. viscosa",10.702331,43.825066,1784.12411615277,1958
@@ -2888,6 +2946,7 @@
 "Spiranthes spiralis (L.) Chevall.",10.690142,43.172464,1784.12411615277,1995
 "Hedera helix L. subsp. helix",10.486641,43.394371,1784.12411615277,2005
 "Prospero autumnale (L.) Speta",10.180278,44.019122,1784.12411615277,1983
+"Colchicum neapolitanum (Ten.) Ten. subsp. neapolitanum",10.536313,43.756417,3989.42280401433,1874
 "Smilax aspera L.",10.428853,43.431197,1784.12411615277,2011
 "Sternbergia colchiciflora Waldst. & Kit.",11.699801,43.153621,1784.12411615277,2006
 "Erica multiflora L. subsp. multiflora",11.145667,42.411119,1784.12411615277,1993
@@ -2896,11 +2955,13 @@
 "Dittrichia viscosa (L.) Greuter subsp. viscosa",10.949922,43.161434,1784.12411615277,2000
 "Erica multiflora L. subsp. multiflora",11.100882,42.252801,1784.12411615277,2000
 "Cyclamen hederifolium Aiton subsp. hederifolium",10.949922,43.161434,1784.12411615277,1965
+"Colchicum neapolitanum (Ten.) Ten. subsp. neapolitanum",11.209104,42.408357,1784.12411615277,1874
 "Cervaria rivinii Gaertn.",11.367415,42.791777,1784.12411615277,2000
 "Helianthus tuberosus L.",11.367415,42.791777,1784.12411615277,2000
 "Smilax aspera L.",9.9045,43.42779,1784.12411615277,1995
 "Smilax aspera L.",9.90239,43.43174,1784.12411615277,1995
 "Prospero autumnale (L.) Speta",10.311995,42.766451,1784.12411615277,2003
+"Setaria faberi F.Herm.",10.674463,43.743405,1784.12411615277,2014
 "Arbutus unedo L.",11.145667,42.411119,1784.12411615277,1905
 "Smilax aspera L.",10.487928,43.749476,1784.12411615277,2009
 "Smilax aspera L.",10.594785,43.746474,1784.12411615277,2009
@@ -3091,6 +3152,7 @@
 "Lipandra polysperma (L.) S.Fuentes, Uotila & Borsch",11.178384,43.158398,1784.12411615277,1985
 "Smilax aspera L.",10.3378465172136,43.5981235502169,1784.12411615277,1984
 "Colchicum lusitanum Brot.",11.255868,43.783279,1784.12411615277,1899
+"Colchicum neapolitanum (Ten.) Ten. subsp. neapolitanum",11.547407,42.97588,3989.42280401433,1904
 "Dittrichia viscosa (L.) Greuter subsp. viscosa",10.096672,42.582879,564.189583547756,2015
 "Sternbergia colchiciflora Waldst. & Kit.",11.871515,42.940429,1784.12411615277,1998
 "Prospero autumnale (L.) Speta",10.2419,43.9468,564.189583547756,2016
@@ -3145,6 +3207,7 @@
 "Dittrichia viscosa (L.) Greuter subsp. viscosa",12.130727,43.569459,3989.42280401433,1994
 "Arbutus unedo L.",10.1061236858368,44.0506758660399,1784.12411615277,2016
 "Hedera helix L. subsp. helix",10.593615,44.010372,1784.12411615277,2012
+"Setaria faberi F.Herm.",10.672317,43.743247,1784.12411615277,2014
 "Artemisia verlotiorum Lamotte",11.304202,43.105901,1784.12411615277,1999
 "Calluna vulgaris (L.) Hull",11.59979,42.84924,1784.12411615277,1994
 "Arbutus unedo L.",9.904034,44.169595,1784.12411615277,1902
@@ -3187,6 +3250,7 @@
 "Hedera helix L. subsp. helix",10.89145,43.051672,3989.42280401433,1994
 "Cervaria rivinii Gaertn.",10.320466,44.164189,1784.12411615277,2012
 "Hedera helix L. subsp. helix",11.10196,43.94595,1784.12411615277,2013
+"Colchicum neapolitanum (Ten.) Ten. subsp. neapolitanum",11.625,42.88479,1784.12411615277,1994
 "Dysphania ambrosioides (L.) Mosyakin & Clemants",11.280677,43.804065,564.189583547756,1960
 "Dysphania ambrosioides (L.) Mosyakin & Clemants",11.103552,43.942612,1784.12411615277,2013
 "Prospero autumnale (L.) Speta",11.189327,43.969887,3989.42280401433,2009
@@ -3301,6 +3365,7 @@
 "Oenothera biennis L.",10.25905,43.831347,1784.12411615277,1922
 "Colchicum autumnale L. subsp. autumnale",9.924196,44.265723,1784.12411615277,2019
 "Oenothera biennis L.",10.253248,43.833884,1784.12411615277,1970
+"Oenothera stricta Link subsp. stricta",10.253248,43.833884,1784.12411615277,1970
 "Oenothera sinuosa W.L.Wagner & Hoch",10.253248,43.833884,1784.12411615277,1970
 "Oenothera biennis L.",10.25905,43.831347,1784.12411615277,1923
 "Oenothera biennis L.",10.25905,43.831347,1784.12411615277,1924
@@ -3312,6 +3377,7 @@
 "Oenothera biennis L.",10.300656,43.884653,1784.12411615277,1964
 "Hedera helix L. subsp. helix",10.237355,43.884703,1784.12411615277,1964
 "Smilax aspera L.",10.25905,43.831347,1784.12411615277,1970
+"Oenothera stricta Link subsp. stricta",10.227068,43.888742,1784.12411615277,1934
 "Smilax aspera L.",10.25905,43.831347,1784.12411615277,1970
 "Seseli tortuosum L. subsp. tortuosum",10.263949,43.860607,1784.12411615277,1964
 "Seseli tortuosum L. subsp. tortuosum",10.197908,43.925282,564.189583547756,1964
@@ -3458,6 +3524,8 @@
 "Sternbergia lutea (L.) Ker Gawl. ex Spreng.",11.076548,43.91797,1784.12411615277,2002
 "Smilax aspera L.",10.544208,43.177167,1784.12411615277,2007
 "Calluna vulgaris (L.) Hull",10.712142,43.788372,3989.42280401433,1938
+"Oenothera rosea L'Hér.",10.486204,43.836614,1784.12411615277,1908
+"Oenothera rosea L'Hér.",10.484771,43.843048,1784.12411615277,1908
 "Symphyotrichum squamatum (Spreng.) G.L.Nesom",10.294215,42.78222,3989.42280401433,2012
 "Calluna vulgaris (L.) Hull",11.333635,43.318519,17841.2411615277,1990
 "Symphyotrichum squamatum (Spreng.) G.L.Nesom",11.100882,42.252801,1784.12411615277,2012
@@ -3601,6 +3669,7 @@
 "Calluna vulgaris (L.) Hull",10.845538,44.054868,1784.12411615277,1941
 "Dittrichia viscosa (L.) Greuter subsp. viscosa",10.487928,43.749476,1784.12411615277,2009
 "Salicornia perennans Willd. subsp. perennans",10.3396348804017,43.5992780935573,564.189583547756,1984
+"Colchicum neapolitanum (Ten.) Ten. subsp. neapolitanum",10.949922,43.161434,1784.12411615277,2000
 "Hieracium sabaudum L.",11.32045,43.585054,3989.42280401433,1860
 "Smilax aspera L.",10.3490781784058,43.6073072275662,564.189583547756,1984
 "Cervaria rivinii Gaertn.",10.487928,43.749476,1784.12411615277,2009
@@ -3848,6 +3917,13 @@
 "Salicornia perennans Willd. subsp. perennans",10.318195,42.803233,564.189583547756,2005
 "Euphorbia dendroides L.",11.088498,42.615583,1784.12411615277,2003
 "Spiranthes spiralis (L.) Chevall.",10.488867,43.738712,1784.12411615277,2009
+"Colchicum neapolitanum (Ten.) Ten. subsp. neapolitanum",10.723068,43.434176,1784.12411615277,1897
+"Colchicum neapolitanum (Ten.) Ten. subsp. neapolitanum",9.867101,44.375487,1784.12411615277,1954
+"Colchicum neapolitanum (Ten.) Ten. subsp. neapolitanum",10.495083,43.837609,1784.12411615277,1955
+"Colchicum neapolitanum (Ten.) Ten. subsp. neapolitanum",10.62403,43.09464,1784.12411615277,1894
+"Colchicum neapolitanum (Ten.) Ten. subsp. neapolitanum",10.495083,43.837609,1784.12411615277,1871
+"Colchicum neapolitanum (Ten.) Ten. subsp. neapolitanum",10.279746,43.718821,1784.12411615277,1949
+"Colchicum neapolitanum (Ten.) Ten. subsp. neapolitanum",10.067034,44.075569,1784.12411615277,1900
 "Spiranthes spiralis (L.) Chevall.",10.452733,43.780089,1784.12411615277,2009
 "Spiranthes spiralis (L.) Chevall.",11.168726,43.894235,1784.12411615277,2009
 "Spiranthes spiralis (L.) Chevall.",11.164831,44.001953,1784.12411615277,2009
@@ -4036,6 +4112,7 @@
 "Arbutus unedo L.",9.89079,43.42435,1784.12411615277,1995
 "Arbutus unedo L.",10.953135,43.341105,1784.12411615277,2000
 "Calluna vulgaris (L.) Hull",10.25461,44.25488,1784.12411615277,1987
+"Symphyotrichum ×salignum (Willd.) G.L.Nesom",11.149001,43.924799,1784.12411615277,2009
 "Calluna vulgaris (L.) Hull",11.227309,42.446132,1784.12411615277,1983
 "Helianthus pauciflorus Nutt.",10.46016,43.747481,1784.12411615277,2000
 "Calluna vulgaris (L.) Hull",10.184189,43.94487,1784.12411615277,1983
@@ -4143,6 +4220,7 @@
 "Dittrichia viscosa (L.) Greuter subsp. viscosa",10.261707,43.821793,1784.12411615277,1990
 "Chenopodiastrum hybridum (L.) S.Fuentes, Uotila & Borsch",11.149001,43.924799,1784.12411615277,2009
 "Hedera helix L. subsp. helix",10.949922,43.161434,1784.12411615277,1964
+"Colchicum neapolitanum (Ten.) Ten. subsp. neapolitanum",10.333885,43.738839,1784.12411615277,1954
 "Hedera helix L. subsp. helix",10.481141,43.586714,1784.12411615277,2008
 "Hedera helix L. subsp. helix",11.076548,43.91797,1784.12411615277,2002
 "Hedera helix L. subsp. helix",11.20293,43.594518,1784.12411615277,2009
@@ -4181,9 +4259,13 @@
 "Calluna vulgaris (L.) Hull",11.070076,43.930648,1784.12411615277,1933
 "Tradescantia fluminensis Vell.",10.533516,43.751545,1784.12411615277,2009
 "Odontites luteus (L.) Clairv. subsp. luteus",10.22278,43.988515,1784.12411615277,1860
+"Symphyotrichum ×salignum (Willd.) G.L.Nesom",10.5006122589111,43.9405519336111,1784.12411615277,1908
+"Symphyotrichum ×salignum (Willd.) G.L.Nesom",10.471561,43.777688,1784.12411615277,1908
 "Smilax aspera L.",10.653645,43.690777,1784.12411615277,1958
 "Hedera helix L. subsp. helix",10.350938,43.743906,1784.12411615277,2010
 "Prospero autumnale (L.) Speta",10.350938,43.743906,1784.12411615277,2010
+"Colchicum neapolitanum (Ten.) Ten. subsp. neapolitanum",11.508386,42.74064,1784.12411615277,2005
+"Colchicum neapolitanum (Ten.) Ten. subsp. neapolitanum",10.183547,44.086568,1784.12411615277,1887
 "Cyclamen hederifolium Aiton subsp. hederifolium",10.3747,44.03788,1784.12411615277,2012
 "Odontites luteus (L.) Clairv. subsp. luteus",11.237356,43.203652,3989.42280401433,2001
 "Odontites luteus (L.) Clairv. subsp. luteus",11.103552,43.942612,1784.12411615277,2013
@@ -4259,6 +4341,7 @@
 "Spiranthes spiralis (L.) Chevall.",10.9998653727403,43.6863422481072,564.189583547756,2019
 "Hieracium sabaudum L.",11.695246,42.663948,3989.42280401433,2010
 "Callitriche brutia Petagna",11.42175,42.45342,1784.12411615277,1892
+"Colchicum neapolitanum (Ten.) Ten. subsp. neapolitanum",11.495823,42.822505,3989.42280401433,2010
 "Arbutus unedo L.",10.909194,43.828846,1784.12411615277,2013
 "Oxybasis urbica (L.) S.Fuentes, Uotila & Borsch",10.918951,42.771692,1784.12411615277,2010
 "Calluna vulgaris (L.) Hull",10.834117,44.114126,1784.12411615277,2019
@@ -4310,6 +4393,7 @@
 "Hedera helix L. subsp. helix",11.4605875128722,43.7208163720495,1784.12411615277,2020
 "Cyclamen hederifolium Aiton subsp. hederifolium",10.229307,43.958506,1784.12411615277,1860
 "Colchicum longifolium Castagne",11.018077,43.113089,3989.42280401433,2010
+"Colchicum neapolitanum (Ten.) Ten. subsp. neapolitanum",11.018077,43.113089,3989.42280401433,2010
 "Smilax aspera L.",11.018077,43.113089,3989.42280401433,2010
 "Spiranthes spiralis (L.) Chevall.",11.018077,43.113089,3989.42280401433,2010
 "Solanum chenopodioides Lam.",10.8767481491881,43.8143171144843,564.189583547756,2020
@@ -4330,6 +4414,7 @@
 "Pulicaria vulgaris Gaertn.",11.018077,43.113089,3989.42280401433,2010
 "Cervaria rivinii Gaertn.",11.018077,43.113089,3989.42280401433,2010
 "Hedera helix L. subsp. helix",11.018077,43.113089,3989.42280401433,2010
+"Colchicum neapolitanum (Ten.) Ten. subsp. neapolitanum",11.048502,42.89367,3989.42280401433,2010
 "Hedera helix L. subsp. helix",10.8723707840758,43.8129855115292,564.189583547756,2020
 "Smilax aspera L.",11.048502,42.89367,3989.42280401433,2010
 "Spiranthes spiralis (L.) Chevall.",11.048502,42.89367,3989.42280401433,2010
@@ -4416,6 +4501,7 @@
 "Dittrichia viscosa (L.) Greuter subsp. viscosa",10.826029,42.779376,3989.42280401433,2010
 "Dittrichia graveolens (L.) Greuter",10.826029,42.779376,3989.42280401433,2010
 "Helianthus tuberosus L.",10.826029,42.779376,3989.42280401433,2010
+"Galatella pannonica (Jacq.) Galasso, Bartolucci & Ardenghi subsp. tripolium (L.) Galasso, Bartolucci & Ardenghi",10.826029,42.779376,3989.42280401433,2010
 "Symphyotrichum lanceolatum (Willd.) G.L.Nesom",10.826029,42.779376,3989.42280401433,2010
 "Symphyotrichum novi-belgii (L.) G.L.Nesom",10.826029,42.779376,3989.42280401433,2010
 "Symphyotrichum squamatum (Spreng.) G.L.Nesom",10.826029,42.779376,3989.42280401433,2010
@@ -4466,6 +4552,7 @@
 "Cervaria rivinii Gaertn.",11.310509,42.675814,3989.42280401433,2010
 "Calluna vulgaris (L.) Hull",10.1769,44.1272,564.189583547756,2016
 "Hieracium sabaudum L.",10.475608,43.739168,564.189583547756,2019
+"Colchicum neapolitanum (Ten.) Ten. subsp. neapolitanum",11.602622,42.870518,1784.12411615277,2010
 "Spiranthes spiralis (L.) Chevall.",10.1607758759837,44.0111587366446,1784.12411615277,2019
 "Cyclamen hederifolium Aiton subsp. hederifolium",11.602622,42.870518,1784.12411615277,2010
 "Odontites luteus (L.) Clairv. subsp. luteus",11.602622,42.870518,1784.12411615277,2010
@@ -4596,15 +4683,23 @@
 "Salicornia perennans Willd. subsp. perennans",11.23333,42.45,564.189583547756,1997
 "Artemisia verlotiorum Lamotte",10.9026069498711,43.7333696328052,564.189583547756,2020
 "Artemisia verlotiorum Lamotte",10.9080357529167,43.7314671611057,564.189583547756,2020
+"Galatella pannonica (Jacq.) Galasso, Bartolucci & Ardenghi subsp. tripolium (L.) Galasso, Bartolucci & Ardenghi",11.23333,42.45,564.189583547756,1998
 "Salicornia perennans Willd. subsp. perennans",11.2197356690356,42.4667687157613,1784.12411615277,2002
+"Galatella pannonica (Jacq.) Galasso, Bartolucci & Ardenghi subsp. tripolium (L.) Galasso, Bartolucci & Ardenghi",11.2015395630786,42.4851084690934,1784.12411615277,1997
+"Galatella pannonica (Jacq.) Galasso, Bartolucci & Ardenghi subsp. tripolium (L.) Galasso, Bartolucci & Ardenghi",11.2182700387916,42.4585865876507,1784.12411615277,2002
 "Smilax aspera L.",11.221287,42.466967,1784.12411615277,1997
 "Dittrichia viscosa (L.) Greuter subsp. viscosa",11.221287,42.466967,1784.12411615277,2002
 "Dittrichia viscosa (L.) Greuter subsp. viscosa",11.221287,42.466967,1784.12411615277,1997
+"Galatella pannonica (Jacq.) Galasso, Bartolucci & Ardenghi subsp. tripolium (L.) Galasso, Bartolucci & Ardenghi",11.2175910925449,42.4580508549814,1784.12411615277,1997
+"Galatella pannonica (Jacq.) Galasso, Bartolucci & Ardenghi subsp. tripolium (L.) Galasso, Bartolucci & Ardenghi",11.227309,42.446132,1784.12411615277,2000
 "Salicornia perennans Willd. subsp. perennans",11.2032126056182,42.4329119326265,1784.12411615277,1997
 "Salicornia perennans Willd. subsp. perennans",11.227309,42.446132,1784.12411615277,2000
 "Salicornia perennans Willd. subsp. perennans",11.2035559283721,42.4331653276131,1784.12411615277,1998
 "Salicornia perennans Willd. subsp. perennans",11.2277601825225,42.4471004741415,1784.12411615277,2000
 "Salicornia perennans Willd. subsp. perennans",11.2178038226592,42.4582463599382,1784.12411615277,2002
+"Galatella pannonica (Jacq.) Galasso, Bartolucci & Ardenghi subsp. tripolium (L.) Galasso, Bartolucci & Ardenghi",11.227309,42.446132,1784.12411615277,2000
+"Galatella pannonica (Jacq.) Galasso, Bartolucci & Ardenghi subsp. tripolium (L.) Galasso, Bartolucci & Ardenghi",11.217516798347,42.4648120844956,1784.12411615277,2002
+"Galatella pannonica (Jacq.) Galasso, Bartolucci & Ardenghi subsp. tripolium (L.) Galasso, Bartolucci & Ardenghi",11.221287,42.466967,1784.12411615277,1997
 "Arbutus unedo L.",10.512393,42.95516,564.189583547756,1951
 "Arbutus unedo L.",10.489701,42.952572,564.189583547756,1951
 "Arbutus unedo L.",10.51686,42.95129,564.189583547756,1951
@@ -4632,6 +4727,8 @@
 "Arbutus unedo L.",10.68588,42.98191,1784.12411615277,1993
 "Hedera helix L. subsp. helix",10.728566,43.03723,1784.12411615277,1993
 "Hedera helix L. subsp. helix",10.68588,42.98191,1784.12411615277,1993
+"Oenothera oehlkersi Kappus ex Rostanski",10.304026,43.988625,1784.12411615277,2020
+"Oenothera oehlkersi Kappus ex Rostanski",10.304026,43.988625,1784.12411615277,2020
 "Smilax aspera L.",10.68588,42.98191,1784.12411615277,1993
 "Smilax aspera L.",10.68588,42.98191,1784.12411615277,1993
 "Smilax aspera L.",10.761417,43.012973,1784.12411615277,1993
@@ -4772,13 +4869,16 @@
 "Dittrichia viscosa (L.) Greuter subsp. viscosa",10.9270708328238,43.6627103768183,564.189583547756,2020
 "Helianthus tuberosus L.",10.9263498107281,43.6606098437732,564.189583547756,2020
 "Artemisia verlotiorum Lamotte",10.9144733438649,43.6809453156101,564.189583547756,2020
+"Galatella pannonica (Jacq.) Galasso, Bartolucci & Ardenghi subsp. tripolium (L.) Galasso, Bartolucci & Ardenghi",10.9144733438649,43.6809453156101,564.189583547756,2020
 "Artemisia verlotiorum Lamotte",10.9131606968761,43.6840940909824,564.189583547756,2020
 "Artemisia verlotiorum Lamotte",10.9207197339061,43.6726310760661,564.189583547756,2020
 "Dittrichia viscosa (L.) Greuter subsp. viscosa",10.9136649521709,43.6877870963393,564.189583547756,2020
 "Sorghum bicolor (L.) Moench",10.9052925346637,43.6862904636719,564.189583547756,2020
 "Artemisia verlotiorum Lamotte",10.9047180762786,43.6871708628003,564.189583547756,2020
 "Artemisia verlotiorum Lamotte",10.9030989054912,43.688353994304,564.189583547756,2020
+"Galatella pannonica (Jacq.) Galasso, Bartolucci & Ardenghi subsp. tripolium (L.) Galasso, Bartolucci & Ardenghi",10.9097787224685,43.7022552163418,564.189583547756,2020
 "Hedera helix L. subsp. helix",10.9097787224685,43.7022552163418,564.189583547756,2020
+"Galatella pannonica (Jacq.) Galasso, Bartolucci & Ardenghi subsp. tripolium (L.) Galasso, Bartolucci & Ardenghi",10.9039638968978,43.6971700819439,564.189583547756,2020
 "Dittrichia viscosa (L.) Greuter subsp. viscosa",10.9101892965856,43.7023579400195,564.189583547756,2020
 "Helianthus tuberosus L.",10.9022938287762,43.6952305345273,564.189583547756,2020
 "Calluna vulgaris (L.) Hull",10.90413,43.21148,1784.12411615277,1916
@@ -4804,6 +4904,7 @@
 "Dittrichia viscosa (L.) Greuter subsp. viscosa",10.8982689692247,43.7161743882315,564.189583547756,2020
 "Artemisia verlotiorum Lamotte",10.8798612664968,43.7106108567887,564.189583547756,2020
 "Artemisia verlotiorum Lamotte",10.8884419311785,43.7142033000546,564.189583547756,2020
+"Galatella pannonica (Jacq.) Galasso, Bartolucci & Ardenghi subsp. tripolium (L.) Galasso, Bartolucci & Ardenghi",10.8890664690291,43.714601247493,564.189583547756,2020
 "Helianthus tuberosus L.",10.8801831315786,43.7104402416371,564.189583547756,2020
 "Artemisia verlotiorum Lamotte",10.8793677400381,43.7111226993292,564.189583547756,2020
 "Artemisia verlotiorum Lamotte",10.8911320864001,43.7053937227737,564.189583547756,2020
@@ -4825,6 +4926,7 @@
 "Sorghum bicolor (L.) Moench",10.9161215955563,43.703371251861,564.189583547756,2020
 "Hedera helix L. subsp. helix",10.9225539019096,43.7040770582509,564.189583547756,2020
 "Solanum chenopodioides Lam.",10.927013901854,43.7086044621816,564.189583547756,2020
+"Galatella pannonica (Jacq.) Galasso, Bartolucci & Ardenghi subsp. tripolium (L.) Galasso, Bartolucci & Ardenghi",10.9207796593159,43.7040460339688,564.189583547756,2020
 "Artemisia verlotiorum Lamotte",10.9286041485165,43.7111496103459,564.189583547756,2020
 "Calluna vulgaris (L.) Hull",11.3025698533254,43.9842198879529,1784.12411615277,2020
 "Hedera helix L. subsp. helix",11.3025698533254,43.9842198879529,1784.12411615277,2020
@@ -4848,6 +4950,7 @@
 "Dittrichia viscosa (L.) Greuter subsp. viscosa",10.9640702442859,43.6928584084047,564.189583547756,2020
 "Sorghum bicolor (L.) Moench",10.9631067635301,43.6929592560777,564.189583547756,2020
 "Hedera helix L. subsp. helix",11.4667958201641,43.9371576103103,1784.12411615277,2020
+"Galatella pannonica (Jacq.) Galasso, Bartolucci & Ardenghi subsp. tripolium (L.) Galasso, Bartolucci & Ardenghi",10.9648963646625,43.6939987529783,564.189583547756,2020
 "Cyclamen hederifolium Aiton subsp. hederifolium",11.5674313531109,43.855111630997,1784.12411615277,2020
 "Hedera helix L. subsp. helix",11.5674313531109,43.855111630997,1784.12411615277,2020
 "Hedera helix L. subsp. helix",11.560366,42.474704,1784.12411615277,1973
