@@ -182,11 +182,8 @@ sampleboost <- function(ndvi, ignorance, boundary, samp_strategy, nplot, areaplo
 
 # Uso la funzione
 
-<<<<<<< HEAD
+
 out1 <- sampleboost(ndvi = ndvi_map, ignorance = igno_map, samp_strategy='random', nplot= 10,  areaplot = 10^6, perm = 30, boundary=site,
-=======
-out1 <- sampleboost(ndvi = ndvi_map, ignorance = igno_map, samp_strategy='random', nplot= 15,  areaplot = 10^6, perm = 10^2, boundary=site,
->>>>>>> eb8063918cf9c808e67bafba397ce75151e29a1c
                     ndvi.weight = 1, igno.weight=1, dist.weight=1)
 
 out1
