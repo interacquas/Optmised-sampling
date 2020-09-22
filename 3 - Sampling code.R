@@ -185,4 +185,4 @@ out1 <- sampleboost(ndvi = ndvi_map, ignorance = igno_map, samp_strategy='random
 
 out1
 
-write.csv(out1$Best, "Punti finali campionamento.csv") # salvo il csv
+write.csv(out1$Best, "punti finali campionamento/12plot-100perm-01.csv") # salvo il csv
