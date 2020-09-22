@@ -149,9 +149,6 @@ sampleboost <- function(ndvi, ignorance, boundary, samp_strategy, nplot, areaplo
   
    p1 <- rasterVis::levelplot(ignorance, layers=1, margin = list(FUN = median), par.settings = RdBuTheme)+
          latticeExtra::layer(sp.points(out1_points, lwd= 0.8, col='darkgray'))
-  
-  
-   write.csv(out1$Best, "Punti finali campionamento.csv") # salvo il csv
    
    
   if (nrow(new_mat) > 1000) {new_mat <- sample_n(new_mat, 1000)}
@@ -183,8 +180,9 @@ sampleboost <- function(ndvi, ignorance, boundary, samp_strategy, nplot, areaplo
 # Uso la funzione
 
 
-out1 <- sampleboost(ndvi = ndvi_map, ignorance = igno_map, samp_strategy='random', nplot= 10,  areaplot = 10^6, perm = 10, boundary=site,
+out1 <- sampleboost(ndvi = ndvi_map, ignorance = igno_map, samp_strategy='random', nplot= 12,  areaplot = 10^6, perm = 100, boundary=site,
                     ndvi.weight = 1, igno.weight=1, dist.weight=1)
 
 out1
 
+write.csv(out1$Best, "Punti finali campionamento.csv") # salvo il csv
