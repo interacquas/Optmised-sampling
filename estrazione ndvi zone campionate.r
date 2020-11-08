@@ -15,7 +15,6 @@ plot(multiband)
 
 plotRGB(multiband, r= 1, g= 2, b = 3, stretch = "lin")
 
-site_repr  <- spTransform(site, crs(multiband))
 zone_repr  <- spTransform(zone, crs(multiband))
 rgb_crop <- crop(multiband, zone_repr)
 
@@ -23,12 +22,5 @@ ndvi <- (nir - red)/(nir+red) # per la mappa NDVI servono solo le bande rosso e 
 ndvi_crop <- crop(ndvi, extent(zone_repr))
 ndvi_zone <- mask(ndvi_crop, zone_repr)
 plot(ndvi_zone)
-plot(site_repr, border="red", lines =3, add=TRUE)
 
 writeRaster(ndvi_zone, "NDVI zone campionate", format = "GTiff")
-
-# aggiungo shape dei plot a ndvi
-buff_plot <- readOGR(dsn = 'gis zone campionamento', layer = 'buffer punti finali campionamento')
-buff_repr  <- spTransform(buff_plot, crs(multiband))
-plot(ndvi_zone)
-plot(buff_repr, border="red", lines=3, add=TRUE)
