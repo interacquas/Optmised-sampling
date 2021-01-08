@@ -8,15 +8,17 @@ library(raster)
 library(rgdal)
 library(sp)
 library(maptools)
+library(rgeos)
 
 ##### carico il dataframe specie con nome df
 
-df <- read_excel("C:/Users/MARCO/Documents/Tesi laureandi/Giuseppe Antonelli/specie-per-plot_coord.xlsx", sheet = "plots")
+df <- read_excel("C:/Users/MARCO/Documents/Tesi laureandi/Giuseppe Antonelli/OPTIMISED SAMPLING NEW/specie-per-plot_coord.xlsx", sheet = "plots")
 df <- as.data.frame(df)
+
 
 ##### carico il dataframe coordinate con nome df_coord
 
-df_coord <- read_excel("C:/Users/MARCO/Documents/Tesi laureandi/Giuseppe Antonelli/specie-per-plot_coord.xlsx", 
+df_coord <- read_excel("C:/Users/MARCO/Documents/Tesi laureandi/Giuseppe Antonelli/OPTIMISED SAMPLING NEW/specie-per-plot_coord.xlsx", 
                        sheet = "coordinates")
 df_coord <- as.data.frame(df_coord)
 df_coord$X <- as.numeric(df_coord$X)
@@ -28,7 +30,8 @@ df_coord$Y <- as.numeric(df_coord$Y)
 
 zone <- raster("gis zone campionamento/MAPPA NDVI_28m.tif")
 sampling <- readOGR('gis zone campionamento/buffer punti finali campionamento.shp')
-sampling <- readOGR('gis zone campionamento/zone campionate 3035.shp')
+sampling <- rgeos::gCentroid(sampling, byid=TRUE)
+#sampling <- readOGR('gis zone campionamento/zone campionate 3035.shp')
 
 
 plot(zone)
@@ -47,6 +50,17 @@ df2 <- df %>% gather(Plot, Species) %>%
   filter(!is.na(Species)) %>%
   mutate(value = 1) %>%
   dcast(Plot~Species, value.var = "value", fill = 0)
+
+# create a vector with letters in the desired order
+x <- c("plot1", "plot2", "plot3", "plot4", "plot5", "plot6", "plot7", "plot8", "plot9", "plot10", "plot11", "plot12")
+
+df2 <- df2 %>% slice(match(x, Plot))
+
+plot_list <- df2$Plot
+df_matrix <- df2[,2:ncol(df2)]
+
+df_matrix[df_matrix >=1] <- 1
+df2 <- cbind(plot_list, df_matrix)
 
 
 ### Applico la funzione centroidpattern
@@ -141,19 +155,6 @@ SCR <- function(community, spatial_order) {
 
 classic <-specaccum(df2[2:ncol(df2 )], method="exact")
 explicit_curve <-SCR(df2, t(mxp_all))
-
-
-
-### PLOT THE CURVES ###
-
-plot(seq(1:12), explicit_curve[,1], xlim= c(1, 12), ylim=c(0,max(explicit_curve[,1 ])+5),
-     xlab="Number of plots", ylab="Species Richness", type="p", pch=10, ann=TRUE,col ="white", main="Rarefaction")
-lines(seq(1:12),explicit_curve[,1], lwd=3, col="dark gray")
-axis(side=1, at=c(1:12))
-lines(seq(1:12),classic$richness, lwd =3, col ="black")
-legend(8, 40, c("Classic", "SER"), lty=c(1,1),lwd=c(2,2),col =
-         c("black","darkgrey"), bty="n", text.col = "black", merge = TRUE, cex=1.3, pt.cex=1)
-
 
 
 ############## diretional SAC Bacaro ################
@@ -311,15 +312,32 @@ explicit_curve_max <-SCR(df2, t(mxp_all_2))
 
 
 plot(seq(1:12), spectral_curve_max[,1], xlim= c(1, 12), ylim=c(0,max(explicit_curve[,1 ])+1),
-     xlab="Number of plots", ylab="Species Richness", type="p", pch=10, ann=TRUE,col ="white", main="Rarefaction")
-lines(seq(1:12),spectral_curve_max[,1], lwd=3, col="dark gray")
+     xlab="Number of plots", ylab="Species Richness", type="p", pch=10, ann=TRUE,col ="white", main="Rarefaction (maximised distances)")
+lines(seq(1:12),spectral_curve_max[,1], lwd=3, col="red")
 axis(side=1, at=c(1:12))
 lines(seq(1:12),explicit_curve_max[,1], lwd =3, col ="black")
-legend(8, 40, c("Spatial", "Spectral"), lty=c(1,1),lwd=c(2,2),col =
-         c("black","darkgrey"), bty="n", text.col = "black", merge = TRUE, cex=1.3, pt.cex=1)
+#lines(seq(1:12),classic$richness, lwd =3, col ="dark gray")
+lines(seq(1:12),classic$richness + classic$sd, lwd =1, lty=2, col ="dark gray")
+lines(seq(1:12),classic$richness - classic$sd, lwd =1, lty=2, col ="dark gray")
+legend(6, 40, c("Spatial (12 comb.)", "Spectral (12 comb.)", "Random (479.001.600 comb.)"), lty=c(1,1),lwd=c(2,2),col =
+         c("black","red", "dark grey"), bty="n", text.col = "black", merge = TRUE, cex=1.3, pt.cex=1)
 
 
-#  beta diversity Baselga
+
+### PLOT THE CURVES ###
+
+plot(seq(1:12), explicit_curve[,1], xlim= c(1, 12), ylim=c(0,max(explicit_curve[,1 ])+1),
+     xlab="Number of plots", ylab="Species Richness", type="p", pch=10, ann=TRUE,col ="white", main="Rarefaction")
+lines(seq(1:12),explicit_curve[,1], lwd=3, col="blue")
+axis(side=1, at=c(1:12))
+lines(seq(1:12),classic$richness, lwd =3, col ="black")
+lines(seq(1:12),spectral_curve_max[,1], lwd=3, col="red")
+legend(8, 40, c("Classic", "SER", "Spectral"), lty=c(1,1),lwd=c(2,2),col =
+         c("black","blue", "red"), bty="n", text.col = "black", merge = TRUE, cex=1.3, pt.cex=1)
+
+
+
+##########  beta diversity Baselga
 
 library(betapart)
 
@@ -341,7 +359,7 @@ ceram.s.samp <- beta.sample(ceram.s.core, sites=12, samples=100)
 
 dist.s <- ceram.s.samp$sampled.values
 
-plot(density(dist.s$beta.SOR), xlim=c(0,0.8), ylim=c(0, 22), xlab='Beta diversity', main='', lwd=3)
+plot(density(dist.s$beta.SOR), xlim=c(0,0.8), ylim=c(0, 27), xlab='Beta diversity', main='', lwd=3)
 
 lines(density(dist.s$beta.SNE), lty=1, lwd=2)
 
@@ -363,6 +381,65 @@ plot(hclust(pair.s$beta.sne, method='average'), hang=-1, main='', sub='', xlab='
 title(xlab=expression(beta[sne]), line=0.3)
 
 
+shapiro.test(spatialdist)
+shapiro.test(pair.s$beta.sor)
+shapiro.test(spectral_dist)
+
+cor.test(spatialdist, pair.s$beta.sor)
+plot(spatialdist, pair.s$beta.sor)
+
+cor.test(spectral_dist, pair.s$beta.sor, method = 'spearman')
+plot(spectral_dist, pair.s$beta.sor)
+
+
+### Plotto tutte le singole 12 curve di accumulo dello spettrale
+
+spec1 <- specaccum(comm_matrix[gsub("plot", "", sampling_order[1,]),], method="collector")
+spec2 <- specaccum(comm_matrix[gsub("plot", "", sampling_order[2,]),], method="collector")
+spec3 <- specaccum(comm_matrix[gsub("plot", "", sampling_order[3,]),], method="collector")
+spec4 <- specaccum(comm_matrix[gsub("plot", "", sampling_order[4,]),], method="collector")
+spec5 <- specaccum(comm_matrix[gsub("plot", "", sampling_order[5,]),], method="collector")
+spec6 <- specaccum(comm_matrix[gsub("plot", "", sampling_order[6,]),], method="collector")
+spec7 <- specaccum(comm_matrix[gsub("plot", "", sampling_order[7,]),], method="collector")
+spec8 <- specaccum(comm_matrix[gsub("plot", "", sampling_order[8,]),], method="collector")
+spec9 <- specaccum(comm_matrix[gsub("plot", "", sampling_order[9,]),], method="collector")
+spec10 <- specaccum(comm_matrix[gsub("plot", "", sampling_order[10,]),], method="collector")
+spec11 <- specaccum(comm_matrix[gsub("plot", "", sampling_order[11,]),], method="collector")
+spec12 <- specaccum(comm_matrix[gsub("plot", "", sampling_order[12,]),], method="collector")
+
+
+SCR_values <- as.data.frame(cbind(spec1$richness, spec2$richness, spec3$richness, spec4$richness, spec5$richness, 
+                    spec6$richness, spec7$richness, spec8$richness, spec9$richness,
+                    spec10$richness, spec11$richness))
+SCR_values$mean <- apply(SCR_values, 1, mean)
+
+
+
+plot(seq(1:12), spec1$richness, xlim= c(1, 12), ylim=c(0,max(explicit_curve[,1 ])+1),
+     xlab="Number of plots", ylab="Species Richness", type="p", pch=10, ann=TRUE,col ="white", main="Rarefaction")
+lines(seq(1:12),spec1$richness, lwd=1, col="blue")
+lines(seq(1:12),spec2$richness, lwd=1, col="blue")
+lines(seq(1:12),spec3$richness, lwd=1, col="blue")
+lines(seq(1:12),spec4$richness, lwd=1, col="blue")
+lines(seq(1:12),spec5$richness, lwd=1, col="blue")
+lines(seq(1:12),spec6$richness, lwd=1, col="blue")
+lines(seq(1:12),spec7$richness, lwd=1, col="blue")
+lines(seq(1:12),spec8$richness, lwd=1, col="blue")
+lines(seq(1:12),spec9$richness, lwd=1, col="blue")
+lines(seq(1:12),spec10$richness, lwd=1, col="blue")
+lines(seq(1:12),spec11$richness, lwd=1, col="blue")
+lines(seq(1:12),spec12$richness, lwd=1, col="blue")
+lines(seq(1:12),spectral_curve_max[,1], lwd=2, lty=2, col="red")
+axis(side=1, at=c(1:12))
+#legend(8, 40, c("Classic", "SER", "Spectral"), lty=c(1,1),lwd=c(2,2),col =
+         #c("black","blue", "red"), bty="n", text.col = "black", merge = TRUE, cex=1.3, pt.cex=1)
+
+
+
+plot(seq(1:12), spec1$N_SCR, xlim= c(1, 12), ylim=c(0,max(explicit_curve[,1 ])+1),
+     xlab="Number of plots", ylab="Species Richness", type="p", pch=10, ann=TRUE,col ="white", main="Rarefaction")
+lines(seq(1:12), SCR_values$mean, lwd=1, col="blue")
+lines(seq(1:12), spectral_curve_max[,1], lwd=1, col="red")
 
 
 
