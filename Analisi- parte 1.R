@@ -10,41 +10,70 @@ library(sp)
 library(maptools)
 library(rgeos)
 
-##### carico il dataframe specie con nome df
+### Dati spettrali
 
-df <- read_excel("C:/Users/MARCO/Documents/Tesi laureandi/Giuseppe Antonelli/OPTIMISED SAMPLING NEW/specie-per-plot_coord.xlsx", sheet = "plots")
+zone <- raster("gis zone campionamento/MAPPA NDVI_28m.tif") #raster ndvi
+
+
+##### carico il dataframe presenza/assenza specie con nome df
+
+df <- read_excel("specie-per-plot_coord.xlsx", sheet = "plots")
 df <- as.data.frame(df)
 
 
+##### Unità di campionamento #####
+
 ##### carico il dataframe coordinate con nome df_coord
 
-df_coord <- read_excel("C:/Users/MARCO/Documents/Tesi laureandi/Giuseppe Antonelli/OPTIMISED SAMPLING NEW/specie-per-plot_coord.xlsx", 
+df_coord <- read_excel("specie-per-plot_coord.xlsx", 
                        sheet = "coordinates")
 df_coord <- as.data.frame(df_coord)
 df_coord$X <- as.numeric(df_coord$X)
 df_coord$Y <- as.numeric(df_coord$Y)
 
 
-### Dati spettrali
+#1  Con i buffer
+
+xy <- df_coord[,3:2]
+df_points <- SpatialPointsDataFrame(coords = xy, data = df_coord, proj4string = CRS("+init=epsg:4326"))
+df_buffer <- spTransform(df_buffer,CRS("+init=epsg:3035"))
 
 
-zone <- raster("gis zone campionamento/MAPPA NDVI_28m.tif")
-sampling <- readOGR('gis zone campionamento/buffer punti finali campionamento.shp')
-#sampling <- rgeos::gCentroid(sampling, byid=TRUE)
-#sampling <- readOGR('gis zone campionamento/zone campionate 3035.shp')
+sampling <- gBuffer(df_buffer, byid=TRUE, width=564)
 
+#2 Con i punti 
 
-plot(zone)
-plot(sampling, add=TRUE)
+sampling <- df_points
 
-values <- extract(zone, sampling, na.rm =TRUE, fun=mean) # faccio il sampling del raster
+#3 Con le tracce di campionamento
+
+track1 <- readOGR('lavoro su ndvi/01/buffer01.shp')
+track2 <- readOGR('lavoro su ndvi/02/buffer02.shp')
+track3 <- readOGR('lavoro su ndvi/03/buffer03.shp')
+track4 <- readOGR('lavoro su ndvi/04/buffer04.shp')
+track5 <- readOGR('lavoro su ndvi/05/buffer05.shp')
+track6 <- readOGR('lavoro su ndvi/06/buffer06.shp')
+track7 <- readOGR('lavoro su ndvi/07/buffer07.shp')
+track8 <- readOGR('lavoro su ndvi/08/buffer08.shp')
+track9 <- readOGR('lavoro su ndvi/09/buffer09.shp')
+track10 <- readOGR('lavoro su ndvi/10/buffer10.shp')
+track11 <- readOGR('lavoro su ndvi/11/buffer11.shp')
+track12 <- readOGR('lavoro su ndvi/12/buffer12.shp')
+
+sampling <- rbind(track1, track2, track3, track4, track5, track6, track7,
+                  track8,track9,track10,track11, track12)
+
+###### 
+# Estraggo i valori
+
+values <- extract(zone, sampling, na.rm =TRUE, fun = median) # faccio il sampling del raster
 
 df_spectra <- as.data.frame(cbind(df_coord$ID, values))
 names(df_spectra) <- c("ID", "ndvi")
 df_spectra$ndvi<- as.numeric(df_spectra$ndvi)
 
 
-#####  creo un dataframe 'presenza-assenza'
+#####  creo un dataframe 'presenza-assenza' (cioè 0/1)
 
 df2 <- df %>% gather(Plot, Species) %>%
   filter(!is.na(Species)) %>%
@@ -63,7 +92,7 @@ df_matrix[df_matrix >=1] <- 1
 df2 <- cbind(plot_list, df_matrix)
 
 
-### Applico la funzione centroidpattern
+### Applico la funzione centroidpattern (non servono)
 
 centroid_pattern <- function (z, longlat) {
   
@@ -125,11 +154,10 @@ centroid_pattern <- function (z, longlat) {
   colnames(seqmatrix) <- c("Plot", 1:(nrow(z)-1))
   return(seqmatrix)
 }
-
 mxp_all <- centroid_pattern(df_coord, longlat = TRUE)
 
 
-##### Applico la funzione Spatially Explicit rarefaction
+##### Applico la funzione Spatially Explicit rarefaction (non serve)
 SCR <- function(community, spatial_order) {
   library(vegan)
   f <- nrow(spatial_order)
@@ -158,7 +186,7 @@ explicit_curve <-SCR(df2, t(mxp_all))
 
 
 ############################################################################################
-##### MODIFICA DELLE FUNZIONI CON LE MASSIME DISTANZE (SPETTRRALI O SPAZIALI), metodo mio
+##### ORDINAMENTO PLOTS PER UN CRITERIO (SPETTRRALI O SPAZIALI), metodo mio
 
 library(rdist)
 
@@ -230,6 +258,7 @@ explicit_curve_max <-SCR(df2, t(mxp_all_2))
 spectral_dist<-vegdist(df_spectra[,2], upper=TRUE, method="euclidean",diag=TRUE)
 yy <- as.matrix(spectral_dist)
 sampling_order <- data.frame()
+
 for(j in 1:ncol(yy)) {
   
   VEC <- yy[,j]
@@ -255,6 +284,7 @@ spectral_curve_max <-SCR(df2, t(sampling_order))
 explicit_curve_max <-SCR(df2, t(mxp_all_2))
 
 
+#Faccio il grafico
 plot(seq(1:12), spectral_curve_max[,1], xlim= c(1, 12), ylim=c(0,max(explicit_curve[,1 ])+1),
      xlab="Number of plots", ylab="Species Richness", type="p", pch=10, ann=TRUE,col ="white", main="Rarefaction (maximised distances)")
 lines(seq(1:12),spectral_curve_max[,1], lwd=3, col="red")
@@ -268,7 +298,7 @@ legend(6, 40, c("Spatial (12 comb.)", "Spectral (12 comb.)", "Random (479.001.60
 
 
 
-##########  beta diversity Baselga
+##########  Beta diversity Baselga
 
 library(betapart)
 
@@ -322,13 +352,6 @@ plot(mt1)
 
 mt2 <- mantel.randtest(spectral_dist, pair.s$beta.sim, nrepet=10^6)
 plot(mt2)
-
-cor.test(spatialdist, pair.s$beta.sor)
-plot(spatialdist, pair.s$beta.sim)
-
-cor.test(spectral_dist, pair.s$beta.sim)
-plot(spectral_dist, pair.s$beta.sim)
-
 
 
 ### Plotto tutte le singole 12 curve di accumulo dello spettrale
