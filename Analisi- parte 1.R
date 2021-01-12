@@ -30,14 +30,14 @@ df_coord$Y <- as.numeric(df_coord$Y)
 
 zone <- raster("gis zone campionamento/MAPPA NDVI_28m.tif")
 sampling <- readOGR('gis zone campionamento/buffer punti finali campionamento.shp')
-sampling <- rgeos::gCentroid(sampling, byid=TRUE)
+#sampling <- rgeos::gCentroid(sampling, byid=TRUE)
 #sampling <- readOGR('gis zone campionamento/zone campionate 3035.shp')
 
 
 plot(zone)
 plot(sampling, add=TRUE)
 
-values <- extract(zone, sampling, na.rm =TRUE, fun=median) # faccio il sampling del raster
+values <- extract(zone, sampling, na.rm =TRUE, fun=mean) # faccio il sampling del raster
 
 df_spectra <- as.data.frame(cbind(df_coord$ID, values))
 names(df_spectra) <- c("ID", "ndvi")
@@ -157,63 +157,7 @@ classic <-specaccum(df2[2:ncol(df2 )], method="exact")
 explicit_curve <-SCR(df2, t(mxp_all))
 
 
-############## diretional SAC Bacaro ################
-
-require(Rarefy)
-require(vegan)
-
-comm_matrix <- df2[,2:ncol(df2)]
-mite.xy <- df_coord[,2:3]
-
-# Spatially-explicit curves can be obtained as follows
-spatialdist <- dist(mite.xy) # to calculate the geographic
-spectraldist <- dist(df_spectra, method = "euclidean") # calculating spectral distance
-
-# distance between plots, i.e. the Euclidean distance # between the coordinates of the plots)
-betas <- directionalSAC(comm_matrix, spatialdist) # to calculate directional
-betas_spectral <- directionalSAC(comm_matrix, spectraldist) # to calculate directional spectral distance
-
-
-# and non directional beta diversity
-plot(1:12, betas$N_Exact, xlab="M", ylab="Species richness", ylim=range(c(betas$N_Exact,
-                                                                          betas$N_SCR, betas$Alpha, mean(apply(comm_matrix, 1, function(x) length(x[x>0]))))))
-points(1:12,rep( mean(apply(comm_matrix, 1, function(x) length(x[x>0]))), 12), pch=2)
-points(1:12, betas$N_SCR, pch=3)
-points(1:12, betas$Alpha_dir, pch=4)
-legend("right", legend=c("Non-directional SAC",
-                         "Non-directional alpha diversity", "Directional SAC",
-                         "Directional alpha diversity"), pch=1:4)
-
-# click on the figure, on an empty area of the figure, to place the legend.
-# M is the number of plots
-plot(1:12, betas$Beta_M, xlab="M", ylab="Beta diversity",
-     ylim=range(c(betas$Beta_M_dir, betas$Beta_M)))
-points(1:12, betas$Beta_M_dir, pch=2)
-legend("right", legend=c("Non-directional beta", "Directional beta"), pch=1:2)
-
-# click on the figure, on an empty area of the figure, to place the legend.
-plot(2:12, betas$Beta_N[2:12], xlab="M", ylab="Normalized beta diversity",
-     ylim=range(c(betas$Beta_N_dir[2:12], betas$Beta_N[2:12])))
-points(2:12, betas$Beta_N_dir[2:12], pch=2)
-legend("right", legend=c("Non-directional beta", "Directional beta"), pch=1:2)
-
-# click on the figure, on an empty area of the figure, to place the legend.
-plot(2:12, betas$Beta_Autocor[2:12], xlab="M",
-     ylab="Normalized measure of autocorrelation")
-
-
-##### Plot spaziale vs. spettrale con i metodi di Bacaro
-
-
-plot(seq(1:12), betas[,1], xlim= c(1, 12), ylim=c(0,max(explicit_curve[,1 ])+1),
-     xlab="Number of plots", ylab="Species Richness", type="p", pch=10, ann=TRUE,col ="white", main="Rarefaction")
-lines(seq(1:12),betas[,1], lwd=3, col="dark gray")
-axis(side=1, at=c(1:12))
-lines(seq(1:12),betas_spectral[,1], lwd =3, col ="black")
-legend(8, 40, c("Spectral", "Spatial"), lty=c(1,1),lwd=c(2,2),col =
-         c("black","darkgrey"), bty="n", text.col = "black", merge = TRUE, cex=1.3, pt.cex=1)
-
-
+############################################################################################
 ##### MODIFICA DELLE FUNZIONI CON LE MASSIME DISTANZE (SPETTRRALI O SPAZIALI), metodo mio
 
 library(rdist)
@@ -324,19 +268,6 @@ legend(6, 40, c("Spatial (12 comb.)", "Spectral (12 comb.)", "Random (479.001.60
 
 
 
-### PLOT THE CURVES ###
-
-plot(seq(1:12), explicit_curve[,1], xlim= c(1, 12), ylim=c(0,max(explicit_curve[,1 ])+1),
-     xlab="Number of plots", ylab="Species Richness", type="p", pch=10, ann=TRUE,col ="white", main="Rarefaction")
-lines(seq(1:12),explicit_curve[,1], lwd=3, col="blue")
-axis(side=1, at=c(1:12))
-lines(seq(1:12),classic$richness, lwd =3, col ="black")
-lines(seq(1:12),spectral_curve_max[,1], lwd=3, col="red")
-legend(8, 40, c("Classic", "SER", "Spectral"), lty=c(1,1),lwd=c(2,2),col =
-         c("black","blue", "red"), bty="n", text.col = "black", merge = TRUE, cex=1.3, pt.cex=1)
-
-
-
 ##########  beta diversity Baselga
 
 library(betapart)
@@ -382,14 +313,22 @@ title(xlab=expression(beta[sne]), line=0.3)
 
 
 shapiro.test(spatialdist)
-shapiro.test(pair.s$beta.sor)
-shapiro.test(spectral_dist)
+shapiro.test(pair.s$beta.sim)
+shapiro.test(spectral_dist2)
+
+library(ade4)
+mt1 <- mantel.randtest(spatialdist,pair.s$beta.sim,nrepet=10^6)
+plot(mt1)
+
+mt2 <- mantel.randtest(spectral_dist, pair.s$beta.sim, nrepet=10^6)
+plot(mt2)
 
 cor.test(spatialdist, pair.s$beta.sor)
-plot(spatialdist, pair.s$beta.sor)
+plot(spatialdist, pair.s$beta.sim)
 
-cor.test(spectral_dist, pair.s$beta.sor, method = 'spearman')
-plot(spectral_dist, pair.s$beta.sor)
+cor.test(spectral_dist, pair.s$beta.sim)
+plot(spectral_dist, pair.s$beta.sim)
+
 
 
 ### Plotto tutte le singole 12 curve di accumulo dello spettrale
@@ -410,13 +349,13 @@ spec12 <- specaccum(comm_matrix[gsub("plot", "", sampling_order[12,]),], method=
 
 SCR_values <- as.data.frame(cbind(spec1$richness, spec2$richness, spec3$richness, spec4$richness, spec5$richness, 
                     spec6$richness, spec7$richness, spec8$richness, spec9$richness,
-                    spec10$richness, spec11$richness))
+                    spec10$richness, spec11$richness,spec11$richness ))
 SCR_values$mean <- apply(SCR_values, 1, mean)
 
 
 
 plot(seq(1:12), spec1$richness, xlim= c(1, 12), ylim=c(0,max(explicit_curve[,1 ])+1),
-     xlab="Number of plots", ylab="Species Richness", type="p", pch=10, ann=TRUE,col ="white", main="Rarefaction")
+     xlab="Number of plots", ylab="Species Richness", type="p", pch=10, ann=TRUE,col ="white", main="Spectral Rarefaction")
 lines(seq(1:12),spec1$richness, lwd=1, col="blue")
 lines(seq(1:12),spec2$richness, lwd=1, col="blue")
 lines(seq(1:12),spec3$richness, lwd=1, col="blue")
@@ -435,11 +374,45 @@ axis(side=1, at=c(1:12))
          #c("black","blue", "red"), bty="n", text.col = "black", merge = TRUE, cex=1.3, pt.cex=1)
 
 
+### Plotto tutte le singole 12 curve di accumulo dello spaziale
 
-plot(seq(1:12), spec1$N_SCR, xlim= c(1, 12), ylim=c(0,max(explicit_curve[,1 ])+1),
-     xlab="Number of plots", ylab="Species Richness", type="p", pch=10, ann=TRUE,col ="white", main="Rarefaction")
-lines(seq(1:12), SCR_values$mean, lwd=1, col="blue")
-lines(seq(1:12), spectral_curve_max[,1], lwd=1, col="red")
+spaz1 <- specaccum(comm_matrix[gsub("plot", "", mxp_all_2[1,]),], method="collector")
+spaz2 <- specaccum(comm_matrix[gsub("plot", "", mxp_all_2[2,]),], method="collector")
+spaz3 <- specaccum(comm_matrix[gsub("plot", "", mxp_all_2[3,]),], method="collector")
+spaz4 <- specaccum(comm_matrix[gsub("plot", "", mxp_all_2[4,]),], method="collector")
+spaz5 <- specaccum(comm_matrix[gsub("plot", "", mxp_all_2[5,]),], method="collector")
+spaz6 <- specaccum(comm_matrix[gsub("plot", "", mxp_all_2[6,]),], method="collector")
+spaz7 <- specaccum(comm_matrix[gsub("plot", "", mxp_all_2[7,]),], method="collector")
+spaz8 <- specaccum(comm_matrix[gsub("plot", "", mxp_all_2[8,]),], method="collector")
+spaz9 <- specaccum(comm_matrix[gsub("plot", "", mxp_all_2[9,]),], method="collector")
+spaz10 <- specaccum(comm_matrix[gsub("plot", "", mxp_all_2[10,]),], method="collector")
+spaz11 <- specaccum(comm_matrix[gsub("plot", "", mxp_all_2[11,]),], method="collector")
+spaz12 <- specaccum(comm_matrix[gsub("plot", "", mxp_all_2[12,]),], method="collector")
 
 
+SCR_values_spaz <- as.data.frame(cbind(spaz1$richness, spaz2$richness, spaz3$richness, spaz4$richness, spaz5$richness, 
+                                  spaz6$richness, spaz7$richness, spaz8$richness, spaz9$richness,
+                                  spaz10$richness, spaz11$richness, spaz12$richness))
+SCR_values_spaz$mean <- apply(SCR_values_spaz, 1, mean)
+
+
+
+plot(seq(1:12), spec1$richness, xlim= c(1, 12), ylim=c(0,max(explicit_curve[,1 ])+1),
+     xlab="Number of plots", ylab="Species Richness", type="p", pch=10, ann=TRUE,col ="white", main="Spatial Rarefaction")
+lines(seq(1:12),spaz1$richness, lwd=1, col="blue")
+lines(seq(1:12),spaz2$richness, lwd=1, col="blue")
+lines(seq(1:12),spaz3$richness, lwd=1, col="blue")
+lines(seq(1:12),spaz4$richness, lwd=1, col="blue")
+lines(seq(1:12),spaz5$richness, lwd=1, col="blue")
+lines(seq(1:12),spaz6$richness, lwd=1, col="blue")
+lines(seq(1:12),spaz7$richness, lwd=1, col="blue")
+lines(seq(1:12),spaz8$richness, lwd=1, col="blue")
+lines(seq(1:12),spaz9$richness, lwd=1, col="blue")
+lines(seq(1:12),spaz10$richness, lwd=1, col="blue")
+lines(seq(1:12),spaz11$richness, lwd=1, col="blue")
+lines(seq(1:12),spaz12$richness, lwd=1, col="blue")
+lines(seq(1:12),explicit_curve_max[,1], lwd=2, lty=2, col="red")
+axis(side=1, at=c(1:12))
+#legend(8, 40, c("Classic", "SER", "Spectral"), lty=c(1,1),lwd=c(2,2),col =
+#c("black","blue", "red"), bty="n", text.col = "black", merge = TRUE, cex=1.3, pt.cex=1)
 
