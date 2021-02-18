@@ -36,7 +36,7 @@ df_coord$Y <- as.numeric(df_coord$Y)
 
 xy <- df_coord[,3:2]
 df_points <- SpatialPointsDataFrame(coords = xy, data = df_coord, proj4string = CRS("+init=epsg:4326"))
-df_buffer <- spTransform(df_buffer,CRS("+init=epsg:3035"))
+df_buffer <- spTransform(df_points,CRS("+init=epsg:3035")) #df_buffer?
 
 
 sampling <- gBuffer(df_buffer, byid=TRUE, width=564)
@@ -186,7 +186,7 @@ explicit_curve <-SCR(df2, t(mxp_all))
 
 
 ############################################################################################
-##### ORDINAMENTO PLOTS PER UN CRITERIO (SPETTRRALI O SPAZIALI), metodo mio
+##### ORDINAMENTO PLOTS PER UN CRITERIO (SPETTRALI O SPAZIALI), metodo mio
 
 library(rdist)
 
@@ -252,7 +252,7 @@ centroid_pattern_max <- function (z, longlat) {
 }
 
 mxp_all_2 <- centroid_pattern_max(df_coord, longlat = TRUE)
-explicit_curve_max <-SCR(df2, t(mxp_all_2))
+explicit_curve_max <- SCR(df2, t(mxp_all_2))
 
 
 spectral_dist<-vegdist(df_spectra[,2], upper=TRUE, method="euclidean",diag=TRUE)
