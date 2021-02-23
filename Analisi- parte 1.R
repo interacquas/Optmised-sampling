@@ -36,7 +36,7 @@ df_coord$Y <- as.numeric(df_coord$Y)
 
 xy <- df_coord[,3:2]
 df_points <- SpatialPointsDataFrame(coords = xy, data = df_coord, proj4string = CRS("+init=epsg:4326"))
-df_buffer <- spTransform(df_points,CRS("+init=epsg:3035")) #df_buffer?
+df_buffer <- spTransform(df_points,CRS("+init=epsg:3035"))
 
 
 sampling <- gBuffer(df_buffer, byid=TRUE, width=564)
