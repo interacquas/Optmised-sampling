@@ -17,7 +17,7 @@ zone <- raster("gis zone campionamento/MAPPA NDVI_28m.tif") #raster ndvi
 
 ##### carico il dataframe presenza/assenza specie con nome df
 
-df <- read_excel("specie-per-plot_coord.xlsx", sheet = "plots")
+df <- read_excel("specie-per-plot_coord.xlsx", sheet = "plots_target")
 df <- as.data.frame(df)
 
 
