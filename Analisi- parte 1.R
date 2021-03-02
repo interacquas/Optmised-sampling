@@ -293,11 +293,20 @@ lines(seq(1:12),explicit_curve_max[,1], lwd =3, col ="black")
 #lines(seq(1:12),classic$richness, lwd =3, col ="dark gray")
 lines(seq(1:12),classic$richness + classic$sd, lwd =1, lty=2, col ="dark gray")
 lines(seq(1:12),classic$richness - classic$sd, lwd =1, lty=2, col ="dark gray")
-legend(6, 40, c("Spatial (12 comb.)", "Spectral (12 comb.)", "Random (479.001.600 comb.)"), lty=c(1,1),lwd=c(2,2),col =
+legend(6, 10,  c("Spatial (12 comb.)", "Spectral (12 comb.)", "Random (479.001.600 comb.)"), lty=c(1,1),lwd=c(2,2),col =
          c("black","red", "dark grey"), bty="n", text.col = "black", merge = TRUE, cex=1.3, pt.cex=1)
 
 
 
+
+
+
+
+
+#######################################################################
+#######################################################################
+#######################################################################
+#######################################################################
 ##########  Beta diversity Baselga
 
 library(betapart)
