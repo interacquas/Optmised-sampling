@@ -1,5 +1,7 @@
+library(readxl)
+
 foglio2 <- read_excel("tempi-raggiungimento.xlsx", 
-                     sheet = "Foglio2")
+                     sheet = "target")
 
 shapiro.test(foglio2$t)
 shapiro.test(foglio2$n)
