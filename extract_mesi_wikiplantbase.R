@@ -10,4 +10,7 @@ date <- na.omit(date)
 mesi <- format(date, '%m')
 mesi <- as.numeric(mesi)
 
-hist(mesi, main="Segnalazioni per mese")
+hist(mesi, main="Segnalazioni per mese", ylab="segnalazioni", xlab="mesi",
+     xlim=c(1,12), breaks=12)
+
+     
