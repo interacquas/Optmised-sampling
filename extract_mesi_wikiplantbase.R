@@ -10,7 +10,9 @@ date <- na.omit(date)
 mesi <- format(date, '%m')
 mesi <- as.numeric(mesi)
 
-hist(mesi, main="Segnalazioni per mese", ylab="segnalazioni", xlab="mesi",
-     xlim=c(1,12), breaks=12)
+segnalaz <- table(mesi)
+
+barplot(segnalaz, main="Segnalazioni per mese", ylab="segnalazioni", xlab="mesi",
+        names.arg=c("JAN", "FEB", "MAR", "APR", "MAY", "JUN", "JUL", "AUG", "SEP", "OCT", "NOV", "DEC"))
 
      
