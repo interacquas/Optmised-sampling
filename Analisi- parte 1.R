@@ -17,7 +17,7 @@ zone <- raster("gis zone campionamento/MAPPA NDVI_28m.tif") #raster ndvi
 
 ##### carico il dataframe presenza/assenza specie con nome df
 
-df <- read_excel("specie-per-plot_coord.xlsx", sheet = "plots_target")
+df <- read_excel("specie-per-plot_coord.xlsx", sheet = "plots")
 df <- as.data.frame(df)
 
 
@@ -47,20 +47,20 @@ sampling <- df_points
 
 #3 Con le tracce di campionamento
 
-track1 <- readOGR('lavoro su ndvi/01/buffer01.shp')
-track2 <- readOGR('lavoro su ndvi/02/buffer02.shp')
-track3 <- readOGR('lavoro su ndvi/03/buffer03.shp')
-track4 <- readOGR('lavoro su ndvi/04/buffer04.shp')
-track5 <- readOGR('lavoro su ndvi/05/buffer05.shp')
-track6 <- readOGR('lavoro su ndvi/06/buffer06.shp')
-track7 <- readOGR('lavoro su ndvi/07/buffer07.shp')
-track8 <- readOGR('lavoro su ndvi/08/buffer08.shp')
-track9 <- readOGR('lavoro su ndvi/09/buffer09.shp')
-track10 <- readOGR('lavoro su ndvi/10/buffer10.shp')
-track11 <- readOGR('lavoro su ndvi/11/buffer11.shp')
-track12 <- readOGR('lavoro su ndvi/12/buffer12.shp')
+#track1 <- readOGR('lavoro su ndvi/01/buffer01.shp')
+#track2 <- readOGR('lavoro su ndvi/02/buffer02.shp')
+#track3 <- readOGR('lavoro su ndvi/03/buffer03.shp')
+#track4 <- readOGR('lavoro su ndvi/04/buffer04.shp')
+#track5 <- readOGR('lavoro su ndvi/05/buffer05.shp')
+#track6 <- readOGR('lavoro su ndvi/06/buffer06.shp')
+#track7 <- readOGR('lavoro su ndvi/07/buffer07.shp')
+#track8 <- readOGR('lavoro su ndvi/08/buffer08.shp')
+#track9 <- readOGR('lavoro su ndvi/09/buffer09.shp')
+#track10 <- readOGR('lavoro su ndvi/10/buffer10.shp')
+#track11 <- readOGR('lavoro su ndvi/11/buffer11.shp')
+#track12 <- readOGR('lavoro su ndvi/12/buffer12.shp')
 
-sampling <- rbind(track1, track2, track3, track4, track5, track6, track7,
+#sampling <- rbind(track1, track2, track3, track4, track5, track6, track7,
                   track8,track9,track10,track11, track12)
 
 ###### 
@@ -295,6 +295,15 @@ lines(seq(1:12),classic$richness + classic$sd, lwd =1, lty=2, col ="dark gray")
 lines(seq(1:12),classic$richness - classic$sd, lwd =1, lty=2, col ="dark gray")
 legend(6, 10,  c("Spatial (12 comb.)", "Spectral (12 comb.)", "Random (479.001.600 comb.)"), lty=c(1,1),lwd=c(2,2),col =
          c("black","red", "dark grey"), bty="n", text.col = "black", merge = TRUE, cex=1.3, pt.cex=1)
+
+
+
+
+
+
+
+
+
 
 
 
