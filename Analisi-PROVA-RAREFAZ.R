@@ -17,7 +17,7 @@ zone <- raster("gis zone campionamento/MAPPA NDVI_28m.tif") #raster ndvi
 
 ##### carico il dataframe presenza/assenza specie con nome df
 
-df <- read_excel("specie-per-plot_PROVA-RAREFAZ.xlsx", sheet = "plots2")
+df <- read_excel("specie-per-plot_PROVA-RAREFAZ.xlsx", sheet = "plots1")
 df <- as.data.frame(df)
 
 
@@ -26,7 +26,7 @@ df <- as.data.frame(df)
 ##### carico il dataframe coordinate con nome df_coord
 
 df_coord <- read_excel("specie-per-plot_PROVA-RAREFAZ.xlsx", 
-                       sheet = "coord2")
+                       sheet = "coord1")
 df_coord <- as.data.frame(df_coord)
 df_coord$X <- as.numeric(df_coord$X)
 df_coord$Y <- as.numeric(df_coord$Y)
