@@ -286,18 +286,15 @@ explicit_curve_max <-SCR(df2, t(mxp_all_2))
 
 #Faccio il grafico
 plot(seq(1:12), spectral_curve_max[,1], xlim= c(1, 12), ylim=c(0,max(explicit_curve[,1 ])+1),
-     xlab="Number of plots", ylab="Species Richness", type="p", pch=10, ann=TRUE,col ="white", main="Rarefaction (maximised distances)")
+     xlab="Number of plots", ylab="Species Richness", type="p", pch=10, ann=TRUE,col ="white", main="Rarefaction (maximised distances) - Total", cex.names=1.8)
 lines(seq(1:12),spectral_curve_max[,1], lwd=3, col="red")
 axis(side=1, at=c(1:12))
 lines(seq(1:12),explicit_curve_max[,1], lwd =3, col ="black")
 #lines(seq(1:12),classic$richness, lwd =3, col ="dark gray")
 lines(seq(1:12),classic$richness + classic$sd, lwd =1, lty=2, col ="dark gray")
 lines(seq(1:12),classic$richness - classic$sd, lwd =1, lty=2, col ="dark gray")
-legend(6, 10,  c("Spatial (12 comb.)", "Spectral (12 comb.)", "Random (479.001.600 comb.)"), lty=c(1,1),lwd=c(2,2),col =
-         c("black","red", "dark grey"), bty="n", text.col = "black", merge = TRUE, cex=1.3, pt.cex=1)
-
-
-
+legend(6, 50,  c("Spatial (12 comb.)", "Spectral (12 comb.)", "Random (12! comb.)", cex.names=1.8), lty=c(1,1),lwd=c(2,2),col =
+         c("black","red", "dark grey"), bty="n", text.col = "black", merge = TRUE, cex=1.1, pt.cex=0.5)
 
 
 
