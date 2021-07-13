@@ -61,7 +61,7 @@ sampling <- df_points
 #track12 <- readOGR('lavoro su ndvi/12/buffer12.shp')
 
 #sampling <- rbind(track1, track2, track3, track4, track5, track6, track7,
-                  track8,track9,track10,track11, track12)
+                  #track8,track9,track10,track11, track12)
 
 ###### 
 # Estraggo i valori
@@ -184,7 +184,6 @@ SCR <- function(community, spatial_order) {
 classic <-specaccum(df2[2:ncol(df2 )], method="exact")
 explicit_curve <-SCR(df2, t(mxp_all))
 
-
 ############################################################################################
 ##### ORDINAMENTO PLOTS PER UN CRITERIO (SPETTRALI O SPAZIALI), metodo mio
 
@@ -282,6 +281,7 @@ names(sampling_order) <- c("Plot", "1", "2", "3", "4", "5", "6", "7", "8", "9", 
 
 spectral_curve_max <-SCR(df2, t(sampling_order))
 explicit_curve_max <-SCR(df2, t(mxp_all_2))
+rarefaction <-SCR(df2)
 
 
 #Faccio il grafico
@@ -295,8 +295,6 @@ lines(seq(1:12),classic$richness + classic$sd, lwd =1, lty=2, col ="dark gray")
 lines(seq(1:12),classic$richness - classic$sd, lwd =1, lty=2, col ="dark gray")
 legend(6, 50,  c("Spatial (12 comb.)", "Spectral (12 comb.)", "Random (12! comb.)", cex.names=1.8), lty=c(1,1),lwd=c(2,2),col =
          c("black","red", "dark grey"), bty="n", text.col = "black", merge = TRUE, cex=1.1, pt.cex=0.5)
-
-
 
 
 
